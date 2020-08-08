@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Mon blog' %}
+{% block body %}
+    <h1>{{ pluralize(articles|length, 'Article', 'Articles')}}</h1>
+        {% for article in articles %}
+            <article>
+                <h2>{{article.title}}</h2>
+                <p>{{article.description}}</p>
+            </article>
+        {% endfor %}
+{% endblock %}
