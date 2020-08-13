@@ -3,13 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArticleController extends AbstractController
@@ -31,11 +30,7 @@ class ArticleController extends AbstractController
     {
         $article = new Article();
 
-        $form = $this->createFormBuilder($article)
-            ->add('title', TextType::class)
-            ->add('description', TextareaType::class)
-            ->getForm()
-        ;
+        $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);
 
@@ -60,15 +55,13 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/article/{id<[0-9]+>}/edit", name="app_article_edit", methods={"GET", "POST"})
+     * @Route("/article/{id<[0-9]+>}/edit", name="app_article_edit", methods={"GET", "PUT"})
      */
     public function edit(Article $article, Request $request, EntityManagerInterface $em): Response
     {
-        $form = $this->createFormBuilder($article)
-            ->add('title', TextType::class)
-            ->add('description', TextareaType::class)
-            ->getForm()
-        ;
+        $form = $this->createForm(ArticleType::class, $article, [
+            'method' => 'PUT'
+        ]);
 
         $form->handleRequest($request);
 
