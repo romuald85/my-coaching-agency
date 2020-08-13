@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Modifier l\'article #' ~ article.id %}
+
+{% block body %}
+    <h1>Modifier l'article # ~ {{article.id}}</h1>
+
+    {{form_start(form)}}
+    {{form_widget(form)}}
+    <input type="submit" value="Modifier">
+    {{form_end(form)}}
+{% endblock %}

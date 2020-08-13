@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Nouvel article' %}
+{% block body %}
+    <h1>Nouvel article</h1>
+
+    {{form_start(form)}}
+
+    {{form_widget(form)}}
+
+    <input type="submit" value="Créer un article" formnovalidate>
+    {{form_end(form)}}
+{% endblock %}

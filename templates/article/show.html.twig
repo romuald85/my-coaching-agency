@@ -7,5 +7,6 @@
     <h1>{{article.title}}</h1>
     <p>{{article.description}}</p>
 </article>
+<a href="{{path('app_article_edit', {id:article.id})}}">Mise à jour</a> |
 <a href="{{path('app_article')}}">Retour</a>
 {% endblock %}
