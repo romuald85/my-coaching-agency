@@ -5,8 +5,6 @@
 {% block body %}
     <h1>Modifier l'article # ~ {{article.id}}</h1>
 
-    {{form_start(form)}}
-    {{form_widget(form)}}
-    <input type="submit" value="Modifier">
-    {{form_end(form)}}
+    {{include('article/_form.html.twig', {submitButtonText: 'Modifier'})}}
+
 {% endblock %}

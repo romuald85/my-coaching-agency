@@ -4,10 +4,6 @@
 {% block body %}
     <h1>Nouvel article</h1>
 
-    {{form_start(form)}}
+    {{include('article/_form.html.twig')}}
 
-    {{form_widget(form)}}
-
-    <input type="submit" value="Créer un article" formnovalidate>
-    {{form_end(form)}}
 {% endblock %}

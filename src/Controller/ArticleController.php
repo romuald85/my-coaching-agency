@@ -81,10 +81,12 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article/{id<[0-9]+>}/delete", name="app_article_delete", methods={"DELETE"})
      */
-    public function delete(Article $article, EntityManagerInterface $em): Response
+    public function delete(Request $request, Article $article, EntityManagerInterface $em): Response
     {
-        $em->remove($article);
-        $em->flush();
+        if($this->isCsrfTokenValid('article_deletion_' . $article->getId(), $request->request->get('csrf_token'))){
+            $em->remove($article);
+            $em->flush();
+        }
 
         return $this->redirectToRoute('app_article');
     }
