@@ -87,6 +87,9 @@
     "egulias/email-validator": {
         "version": "2.1.18"
     },
+    "knplabs/knp-time-bundle": {
+        "version": "v1.13.0"
+    },
     "monolog/monolog": {
         "version": "2.1.1"
     },
@@ -508,6 +511,9 @@
         "version": "4.3.0"
     },
     "twig/extra-bundle": {
+        "version": "v3.0.5"
+    },
+    "twig/string-extra": {
         "version": "v3.0.5"
     },
     "twig/twig": {
