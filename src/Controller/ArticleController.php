@@ -38,6 +38,8 @@ class ArticleController extends AbstractController
             $em->persist($article);
             $em->flush();
 
+            $this->addFlash('success', 'Article ajouté');
+
             return $this->redirectToRoute('app_article');
         }
 
@@ -68,6 +70,8 @@ class ArticleController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $em->flush();
 
+            $this->addFlash('success', 'Article modifié');
+
             return $this->redirectToRoute('app_article');
         }
 
@@ -86,6 +90,8 @@ class ArticleController extends AbstractController
         if($this->isCsrfTokenValid('article_deletion_' . $article->getId(), $request->request->get('csrf_token'))){
             $em->remove($article);
             $em->flush();
+
+            $this->addFlash('info', 'Article supprimé');
         }
 
         return $this->redirectToRoute('app_article');
