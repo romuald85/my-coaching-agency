@@ -2,8 +2,12 @@
 
 {% block title 'Nouvel article' %}
 {% block body %}
-    <h1>Nouvel article</h1>
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1>Nouvel article</h1>
 
-    {{include('article/_form.html.twig')}}
+            {{include('article/_form.html.twig')}}
+        </div>
+    </div>
 
 {% endblock %}
