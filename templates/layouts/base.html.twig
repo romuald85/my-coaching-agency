@@ -3,32 +3,38 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <style>
-            .alert
-            {
-                padding: 220px;
-                color: white;
-                text-align: center;
-            }
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+            <!--<link rel="stylesheet" href="public/css/base-html-twig.css">-->
+            <style>
+                html, body
+                {
+                    font-family: 'Montserrat', sans-serif;
+                }
+                .alert
+                {
+                    padding: 220px;
+                    color: white;
+                    text-align: center;
+                }
 
-            .alert-success
-            {
-                background-color: green;
-            }
+                .alert-success
+                {
+                    background-color: green;
+                }
 
-            .alert-error
-            {
-                background-color: red;
-            }
+                .alert-error
+                {
+                    background-color: red;
+                }
 
-            .alert-info
-            {
-                background-color: blue;
-            }
-        </style>
-        {% block stylesheets %}{% endblock %}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <!--<link rel="stylesheet" href="public/css/base-html-twig.css">-->
+                .alert-info
+                {
+                    background-color: blue;
+                }
+            </style>
+        {% endblock %}
     </head>
     <body>
         {{include('layouts/partials/_flash_messages.html.twig')}}
