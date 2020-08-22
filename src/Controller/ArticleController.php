@@ -70,7 +70,7 @@ class ArticleController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $em->flush();
 
-            $this->addFlash('success', 'Article modifié');
+            $this->addFlash('success', "L' {$article->getTitle()} a été modifié");
 
             return $this->redirectToRoute('app_article');
         }
