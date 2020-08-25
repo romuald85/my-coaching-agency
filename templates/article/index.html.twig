@@ -2,12 +2,26 @@
 
 {% block title 'Mon blog' %}
 {% block body %}
-    <h1>{{ pluralize(articles|length, 'Article', 'Articles')}}</h1>
-        {% for article in articles %}
-            <article>
-                <h2><a href="{{path('app_article_show', {id:article.id})}}">{{article.title}}</a></h2>
-                <p>{{article.description|u.truncate(10, '...', false)}}</p>
-                <p>Publié {{article.createdAt|ago}}</p>
-            </article>
+    {% if articles|length > 0 %}
+        <h1 class="mb-4 text-center text-muted">{{ pluralize(articles|length, 'Article', 'Articles')}}</h1>
+        {% for row in articles|batch(3) %}
+            <div class="row mb-5">
+                {% for article in row %}
+                    <div class="col-md-4">
+                        <article class="article bg-white rounded shadow">
+                            <div class="mw-100 overflow-hidden">
+                                <a href="{{path('app_article_show', {id:article.id})}}">
+                                    <img src="{{ (article.imageName ? vich_uploader_asset(article) : asset('build/images/empty.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ article.title }}" class="w-100 rounded-top" />                            
+                                </a>
+                            </div>
+                            <h2 class="h5 pl-3 pt-3"><a href="{{path('app_article_show', {id:article.id})}}" class="text-secondary text-decoration-none">{{article.title}}</a></h2>
+                            <p class="class-muted pl-3 pb-3"><small>Publié par [OWNER FULL NAME]</small></p>
+                        </article>
+                    </div>
+                {% endfor %}
+            </div>
         {% endfor %}
+    {% else %}
+        <p class="mt-5 text-center h3">Il n'y a pas encore d'article <a href="{{path('app_article_create')}}">Soyez le premier</a></p>
+    {% endif %}
 {% endblock %}

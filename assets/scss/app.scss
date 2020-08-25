@@ -41,3 +41,10 @@ body {
     @extend .shadow;
     @extend .img-thumbnail;
 }
+
+.article{
+    img:hover{
+        transition: transform 0.3s ease-out;
+        transform: scale(1.075);
+    }
+}
