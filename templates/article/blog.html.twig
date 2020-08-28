@@ -1,0 +1,24 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Mon blog' %}
+
+{% block body %}
+    <h1 class="pt-5 pb-5 text-center">La pratique d'un sport avec un coach sportif</h1>
+
+    <div class="row">
+        {% for article in articles %}
+         <div class="col-6 col-md-4"></div>
+            <div class="col-6 col-md-4">
+                <article class="mt-5 mb-5 bg-white rounded shadow">
+                    <h2>{{article.title}}</h2>
+                    <p>
+                        <img src="{{ (article.imageName ? vich_uploader_asset(article) : asset('build/images/empty.jpg')) }}" alt="{{ article.title }}" class="w-100" />                            
+                    </p>
+                    <p class="text-break">{{article.description}}</p>
+                </article>
+            </div>
+            <div class="col-6 col-md-4">
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

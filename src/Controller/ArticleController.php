@@ -99,4 +99,14 @@ class ArticleController extends AbstractController
 
         return $this->redirectToRoute('app_article');
     }
+
+    /**
+     * @Route("/blog", name="app_blog", methods="GET")
+     */
+    public function blog(ArticleRepository $articleRepository): Response
+    {
+        $articles = $articleRepository->findBy([], ['createdAt' => 'DESC']);
+
+        return $this->render('article/blog.html.twig', compact('articles'));
+    }
 }
