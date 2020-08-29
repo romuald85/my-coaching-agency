@@ -1,7 +1,11 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title 'Ma page d\'accueil' %}
+{% block stylesheets %}
+  {{encore_entry_link_tags('app')}}
+
+  <link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Ma page d'accueil</h1>
+  {{include('layouts/partials/_home.html.twig')}}
 {% endblock %}
