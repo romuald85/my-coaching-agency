@@ -3,30 +3,32 @@
 {% block title article.title %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-md-6 mx-auto">
-            <article class="article bg-white rounded shadow">
-                <div class="mw-100 overflow-hidden rounded-top">
-                        <img src="{{ (article.imageName ? vich_uploader_asset(article) : asset('build/images/empty.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ article.title }}" class="w-100" />                            
-                </div>
-                <div class="p-3">
-                    <h1 class="h5 text-secondary">{{article.title}}</h1>
-                    <p class="class-muted">
-                        <small>Publié <time datetime="{{article.createdAt|date('d-m-Y H:i:s')}}">{{article.createdAt|ago}}</time> par {{article.user.fullName}}</small>
-                    </p>
-                    <p class="text-break pt-3">
-                        {{article.description}}
-                    </p>
-                    <div class="pt-3">
-                        <a href="{{path('app_article_edit', {id:article.id})}}" class="btn btn-light">Modifier</a>
-                        <a href="#" onclick="event.preventDefault(); confirm('Confirmer la suppression') && document.getElementById('js_article_delete').submit()" class="btn btn-light">Supprimer</a>
-                        <form id="js_article_delete" action="{{path('app_article_delete', {id:article.id})}}" method="POST" style="display:none;">
-                            <input type="hidden" name="csrf_token" value="{{csrf_token('article_deletion_' ~ article.id)}}">
-                            <input type="hidden" name="_method" value="DELETE">
-                        </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <article class="article bg-white rounded shadow">
+                    <div class="mw-100 overflow-hidden rounded-top">
+                            <img src="{{ (article.imageName ? vich_uploader_asset(article) : asset('build/images/empty.jpg'))}}" alt="{{ article.title }}" class="w-100" />                            
                     </div>
-                </div>
-            </article>
+                    <div class="p-3">
+                        <h1 class="h5 text-secondary">{{article.title}}</h1>
+                        <p class="class-muted">
+                            <small>Publié <time datetime="{{article.createdAt|date('d-m-Y H:i:s')}}">{{article.createdAt|ago}}</time> par {{article.user.fullName}}</small>
+                        </p>
+                        <p class="text-break pt-3">
+                            {{article.description}}
+                        </p>
+                        <div class="pt-3">
+                            <a href="{{path('app_article_edit', {id:article.id})}}" class="btn btn-light">Modifier</a>
+                            <a href="#" onclick="event.preventDefault(); confirm('Confirmer la suppression') && document.getElementById('js_article_delete').submit()" class="btn btn-light">Supprimer</a>
+                            <form id="js_article_delete" action="{{path('app_article_delete', {id:article.id})}}" method="POST" style="display:none;">
+                                <input type="hidden" name="csrf_token" value="{{csrf_token('article_deletion_' ~ article.id)}}">
+                                <input type="hidden" name="_method" value="DELETE">
+                            </form>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -3,11 +3,13 @@
 {% block title 'Modifier l\'article #' ~ article.id %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-md-6 mx-auto">
-            <h1>Modifier l'article # ~ {{article.id}}</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <h1>Modifier l'article # ~ {{article.id}}</h1>
 
-            {{include('article/_form.html.twig', {submitButtonText: 'Modifier'})}}
+                {{include('article/_form.html.twig', {submitButtonText: 'Modifier'})}}
+            </div>
         </div>
     </div>
 {% endblock %}
