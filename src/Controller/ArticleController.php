@@ -36,8 +36,7 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $user1 = $userRepo->findOneBy(['email' => 'johndoe@example.com']);
-            $article->setUser($user1);
+            $article->setUser($this->getUser());
             $em->persist($article);
             $em->flush();
 
