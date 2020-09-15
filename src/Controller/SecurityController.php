@@ -39,30 +39,4 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
-
-    /**
-     * @Route("/register", name="app_register")
-     */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
-    {
-        $user = new User();
-        $form = $this->createForm(UserRegistrationType::class, $user);
-
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            $this->addFlash('success', 'Le compte a bien été créer');
-
-            return $this->redirectToRoute('app_home');
-        }
-        return $this->render('security/register.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
 }
