@@ -10,12 +10,11 @@ body {
 
 .alert
 {
-    padding: 10px;
-    color: white;
+    margin-top: 55px;
     text-align: center;
 }
 
-.alert-success
+/*.alert-success
 {
     background-color: green;
 }
@@ -28,7 +27,7 @@ body {
 .alert-info
 {
     background-color: blue;
-}
+}*/
 
 /*.vich-image .form-check{
     @extend .mt-3;
