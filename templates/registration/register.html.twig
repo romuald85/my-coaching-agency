@@ -3,14 +3,14 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="mt-5 container">
         <div class="row">
             <div class="col-md-6 mx-auto">
                 {% for flashError in app.flashes('verify_email_error') %}
                     <div class="alert alert-danger" role="alert">{{ flashError }}</div>
                 {% endfor %}
 
-                <h1 class="mt-5 mb-3 text-center">S'enregistrer</h1>
+                <h1 class="my-5 text-center">S'enregistrer</h1>
 
                 {{ form_start(registrationForm) }}
                     <div class="row">
@@ -27,8 +27,12 @@
                     }) }}
                     {{ form_row(registrationForm.agreeTerms) }}
 
-                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    <button type="submit" class="btn btn-primary btn-block" formnovalidate>Register</button>
+                    <p class="mt-5 mb-3 text-center text-muted">
+                        Vous avez déjà un compte? <a href="{{path('app_login')}}">Se connecter</a>
+                    </p>
                 {{ form_end(registrationForm) }}
+
             </div>
         </div>
     </div>
