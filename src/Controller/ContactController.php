@@ -4,16 +4,17 @@ namespace App\Controller;
 
 use App\Form\ContactType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mime\Email;
 
 class ContactController extends AbstractController
 {
     /**
      * @Route("/contact", name="app_contact")
      */
-    public function contact(Request $request, \Swift_Mailer $mailer)
+    public function contact(Request $request, MailerInterface $mailer)
     {
         $form = $this->createForm(ContactType::class);
 
@@ -22,16 +23,12 @@ class ContactController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $contact = $form->getData();
 
-            $message = (new \Swift_Message('Nouveau message'))
-                ->setFrom($contact['email'])
-                ->setTo('votreadresse@example.com')
-                ->setBody(
-                    $this->renderView(
-                        'email/contact.html.twig',
-                        compact('contact')
-                    ),
-                    'text/html'
-                )
+            $message = (new Email())
+                ->from($contact['email'])
+                ->to('votreadresse@example.com')
+                ->subject('Time for Symfony Mailer!')
+                ->text('Sending emails is fun again!')
+                ->html('<p>See Twig integration for better HTML integration!</p>')
             ;
 
             $mailer->send($message);
