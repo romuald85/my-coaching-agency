@@ -19,9 +19,19 @@
                         <tr>
                             <td>{{user.id}}</td>
                             <td>{{user.email}}</td>
-                            <td></td>
+                            <td>
+                                {% for role in user.roles %}
+                                    {% if role == 'ROLE_ADMIN' %}
+                                        Administrateur
+                                    {% elseif role == 'ROLE_EDITOR' %}
+                                        Éditeur
+                                    {% elseif role == 'ROLE_USER' %}
+                                        Utilisateur
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
                             <td>{{user.articles|length}}</td>
-                            <td></td>
+                            <td><a href="#" class="btn btn-warning">Modifier</a></td>
                         </tr>
                     {% else %}
                         <tr>
