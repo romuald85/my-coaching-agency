@@ -3,7 +3,7 @@
 {% block title 'Se connecter' %}
 
 {% block body %}
-    <div class="container">
+    <div class="mt-5 container">
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <h1 class="my-5 text-center">Veuillez vous connecter</h1>
@@ -37,7 +37,7 @@
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                     <button class="btn btn-lg btn-primary btn-block" type="submit">
-                        Sign in
+                        Se connecter
                     </button>
                     <p class="mt-5 mb-3 text-center text-muted">Vous n'avez pas encore de compte ? <a href="{{path('app_register')}}">En créer un</a></p>
                 </form>
