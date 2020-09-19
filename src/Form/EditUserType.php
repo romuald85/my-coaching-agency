@@ -23,6 +23,14 @@ class EditUserType extends AbstractType
                 'label' => 'Changer le prénom',
             ])
             ->add('email', EmailType::class, [
+                'constraints' => [
+                    new notBlank([
+                        'message' => 'Merci de saisir une adresse email'
+                    ])
+                ],
+                'required' => true,
+            ],
+             [
                 'label' => 'Changer l\'email',
             ])
             ->add('roles', ChoiceType::class, [
