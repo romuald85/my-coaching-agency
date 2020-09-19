@@ -39,7 +39,7 @@ class EditUserType extends AbstractType
                     'Éditeur' => 'ROLE_EDITOR',
                     'Utilisateur' => 'ROLE_USER'
                 ],
-                'label' => 'Changer le rôle de l\utilisateur',
+                'label' => 'Changer le rôle de l\'utilisateur',
                 'required' => true,
                 'expanded' => true,
                 'multiple' => true,
