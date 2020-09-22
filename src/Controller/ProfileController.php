@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Form\EditProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,10 +21,12 @@ class ProfileController extends AbstractController
     /**
      * Modifier le profil de l'utilisateur
      * 
-     * @Route("/profile/edit/{id<[0-9]+>}", name="app_profile_edit")
+     * @Route("/profile/edit", name="app_profile_edit")
      */
-    public function editProfile(Request $request, EntityManagerInterface $em, User $user)
+    public function editProfile(Request $request, EntityManagerInterface $em)
     {
+        $user = $this->getUser();
+
         $form = $this->createForm(EditProfileType::class, $user);
 
         $form->handleRequest($request);
