@@ -1,11 +1,16 @@
-<h1>Hi! Please confirm your email!</h1>
+<div class="mt-5 container">
+    <div class="row">
+        <h1 class="mt-5">Salut! Veuillez confirmer votre mail</h1>
 
-<p>
-    Please confirm your email address by clicking the following link: <br><br>
-    <a href="{{ signedUrl|raw }}">Confirm my Email</a>.
-    This link will expire in {{ expiresAt|date('g') }} hour(s).
-</p>
+        <p>
+            Veuillez confirmer votre adresse e-mail en cliquant sur le lien suivant: <br><br>
+            <a href="{{ signedUrl|raw }}">Confirmer mon Email</a>.
+            Ce lien expire dans {{ expiresAt|date('g') }} heure(s).
+        </p>
 
-<p>
-    Cheers!
-</p>
+        <p>
+            Merci!
+        </p>   
+    </div>
+</div>
+

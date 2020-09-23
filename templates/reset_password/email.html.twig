@@ -1,0 +1,15 @@
+<div class="mt-5 container">
+    <div class="row">
+        <h1 class="mt-5">Salut!</h1>
+
+        <p>
+            Pour réinitialiser votre mot de passe, veuillez visiter
+            <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">Ici</a>
+            Pour réinitialiser votre mot de passe, veuillez visiter {{ tokenLifetime|date('g') }} heure(s)..
+        </p>
+
+        <p>
+            Merci!
+        </p>
+    </div>
+</div>
