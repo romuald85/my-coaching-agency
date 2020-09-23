@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Form\EditProfileType;
+use App\Form\EditPassWordType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfileController extends AbstractController
 {
@@ -40,6 +42,43 @@ class ProfileController extends AbstractController
         }
 
         return $this->render('profile/edit_profile.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * Modifier le mot de passe
+     * 
+     * @Route("profile/editpassword", name="app_profile_editpassword")
+     *
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param EntityManagerInterface $em
+     * @return void
+     */
+    public function editPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em)
+    {
+        $user = $this->getUser();
+
+        $form = $this->createForm(EditPassWordType::class, $user);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+            $em->flush();
+
+            $this->addFlash('success', 'Le mot de passe a bien été modifié');
+
+            return $this->redirectToRoute('app_profile');
+        }
+
+        return $this->render('profile/edit_password.html.twig', [
             'form' => $form->createView()
         ]);
     }
