@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ProductsRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProductsController extends AbstractController
 {
     /**
-     * @Route("/products", name="products")
+     * Liste des programmmes achetés par l'utilisateur et sa quantité
+     * @Route("/admin/users_programs", name="app_users_programs")
      */
-    public function index()
+    public function productsSold(ProductsRepository $products)
     {
-        return $this->render('products/index.html.twig', [
-            'controller_name' => 'ProductsController',
+        return $this->render('admin/users_programs.html.twig', [
+            'products' => $products->findAll()
         ]);
     }
 }
