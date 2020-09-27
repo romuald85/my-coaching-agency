@@ -68,14 +68,14 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\OneToMany(targetEntity=Products::class, mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Command::class, mappedBy="user", orphanRemoval=true)
      */
-    private $products;
+    private $commands;
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
-        $this->products = new ArrayCollection();
+        $this->commands = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -241,30 +241,30 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Products[]
+     * @return Collection|Command[]
      */
-    public function getProducts(): Collection
+    public function getCommands(): Collection
     {
-        return $this->products;
+        return $this->commands;
     }
 
-    public function addProduct(Products $product): self
+    public function addCommand(Command $command): self
     {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->setUser($this);
+        if (!$this->commands->contains($command)) {
+            $this->commands[] = $command;
+            $command->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeProduct(Products $product): self
+    public function removeCommand(Command $command): self
     {
-        if ($this->products->contains($product)) {
-            $this->products->removeElement($product);
+        if ($this->commands->contains($command)) {
+            $this->commands->removeElement($command);
             // set the owning side to null (unless already changed)
-            if ($product->getUser() === $this) {
-                $product->setUser(null);
+            if ($command->getUser() === $this) {
+                $command->setUser(null);
             }
         }
 
