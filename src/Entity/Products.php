@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=ProductsRepository::class)
  * @ORM\Table(name="products")
  * @Vich\Uploadable
+ * @ORM\HasLifecycleCallbacks
  */
 class Products
 {

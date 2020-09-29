@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Nouveau produit' %}
+{% block body %}
+    <div class="mt-5 container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <h1 class="my-5 text-center">Nouveau produit</h1>
+                {{form_start(form)}}
+
+                {{form_widget(form)}}
+
+                <input type="submit" class="btn btn-primary btn-block" value="Créer produit">
+                {{form_end(form)}}
+            </div>
+        </div>
+    </div>
+{% endblock %}

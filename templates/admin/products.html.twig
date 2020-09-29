@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Liste des produits' %}
+{% block body %}
+    <div class="mt-5 container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <h1 class="my-5 text-center">Liste des produits</h1>
+                {% for product in products %}
+                    <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('build/images/empty.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ product.title }}" class="w-100" />
+                    <div>{{product.title}}</div>
+                    <div>{{product.price}}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
