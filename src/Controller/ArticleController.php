@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
-use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -72,7 +71,7 @@ class ArticleController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $em->flush();
 
-            $this->addFlash('success', "L' {$article->getTitle()} a été modifié");
+            $this->addFlash('success', "L' article {$article->getTitle()} a été modifié");
 
             return $this->redirectToRoute('app_article');
         }

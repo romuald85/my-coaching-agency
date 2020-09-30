@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title products.title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <article class="article bg-white rounded shadow">
+                    <div class="mw-100 overflow-hidden rounded-top">
+                            <img src="{{ (products.imageName ? vich_uploader_asset(products) : asset('build/images/empty.jpg'))}}" alt="{{ products.title }}" class="w-100" />                            
+                    </div>
+                    <div class="p-3">
+                        <h1 class="h5 text-secondary">{{products.title}}</h1>
+                        <p class="text-break pt-3">
+                            {{products.price}}
+                        </p>
+                        <div class="pt-3">
+                            <a href="{{path('app_products_edit', {id:products.id})}}" class="btn btn-light">Modifier</a>
+                            {#<a href="#" onclick="event.preventDefault(); confirm('Confirmer la suppression') && document.getElementById('js_products_delete').submit()" class="btn btn-light">Supprimer</a>
+                            <form id="js_products_delete" action="{{path('app_products_delete', {id:products.id})}}" method="POST" style="display:none;">
+                                <input type="hidden" name="csrf_token" value="{{csrf_token('products_deletion_' ~ products.id)}}">
+                                <input type="hidden" name="_method" value="DELETE">
+                            </form>#}
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Modifier le produit #' ~ products.id %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <h1>Modifier le produit # ~ {{products.id}}</h1>
+                {{include('layouts/partials/_form_edit.html.twig', {submitButtonText: 'Modifier'})}}
+            </div>
+        </div>
+    </div>
+{% endblock %}
