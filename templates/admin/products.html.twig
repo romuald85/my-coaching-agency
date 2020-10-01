@@ -6,13 +6,17 @@
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <h1 class="my-5 text-center">Liste des produits</h1>
-                {% for product in products %}
-                    <a href="{{path('app_products_show', {id: product.id})}}">
-                        <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('build/images/empty.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ product.title }}" class="w-100" />
-                    </a>
-                    <div>{{product.title}}</div>
-                    <div>{{product.price}}</div>
-                {% endfor %}
+                {% if products|length > 0 %}
+                    {% for product in products %}
+                        <a href="{{path('app_products_show', {id: product.id})}}">
+                            <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('build/images/empty.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ product.title }}" class="w-100" />
+                        </a>
+                        <div>{{product.title}}</div>
+                        <div>{{product.price}}</div>
+                    {% endfor %}
+                {% else %}
+                    <p class="mt-5 text-center h3">Il n'y a pas encore de produits <a href="{{path('app_create_products')}}">Soyez le premier</a></p>
+                {% endif %}
             </div>
         </div>
     </div>

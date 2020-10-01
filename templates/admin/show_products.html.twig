@@ -22,6 +22,10 @@
                                 <input type="hidden" name="csrf_token" value="{{csrf_token('products_deletion_' ~ products.id)}}">
                                 <input type="hidden" name="_method" value="DELETE">
                             </form>#}
+                            <a href="#" onclick="event.preventDefault(); confirm('Confirmer la suppression') && document.getElementById('js_article_products_delete').submit()" class="btn btn-light">Supprimer</a>
+                            <form id="js_article_products_delete" action="{{path('app_products_delete', {id:products.id})}}" method="POST" style="display:none;">
+                                <input type="hidden" name="_method" value="DELETE">
+                            </form>
                         </div>
                     </div>
                 </article>

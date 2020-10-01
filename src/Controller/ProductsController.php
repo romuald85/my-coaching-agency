@@ -85,4 +85,18 @@ class ProductsController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/admin/products/{id<[0-9]+>}/delete", name="app_products_delete", methods="DELETE")
+     */
+    public function deleteProducts(Products $products, EntityManagerInterface $em)
+    {
+        $em->remove($products);
+
+        $em->flush();
+
+        $this->addFlash('success', 'Produit supprimé');
+
+        return $this->redirectToRoute('app_products');
+    }
 }
