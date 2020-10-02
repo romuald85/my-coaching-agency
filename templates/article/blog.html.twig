@@ -11,10 +11,10 @@
             <div class="col-6 col-md-4"></div>
                 <div class="col-6 col-md-4">
                     <article class="mt-5 mb-5 bg-white rounded shadow">
-                        <h2>{{article.title}}</h2>
-                        <p>
+                        <a href="{{path('app_blog_article_show', {id:article.id})}}" class="btn btn-light"><h2>{{article.title}}</h2></a>
+                        <a href="{{path('app_blog_article_show', {id:article.id})}}" class="btn btn-light">
                             <img src="{{ (article.imageName ? vich_uploader_asset(article) : asset('images/empty.jpg'))}}" alt="{{ article.title }}" class="w-100" />                            
-                        </p>
+                        </a>
                         <p class="text-break">{{article.description}}</p>
                     </article>
                 </div>

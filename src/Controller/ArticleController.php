@@ -3,13 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comments;
 use App\Form\ArticleType;
+use App\Form\CommentsType;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ArticleController extends AbstractController
 {
@@ -106,5 +111,35 @@ class ArticleController extends AbstractController
         $articles = $articleRepository->findBy([], ['createdAt' => 'DESC']);
 
         return $this->render('article/blog.html.twig', compact('articles'));
+    }
+
+    /**
+     * @Route("/blog/{id<[0-9]+>}", name="app_blog_article_show", methods={"GET", "POST"})
+     */
+    public function showInBlog(Article $article, Request $request, EntityManagerInterface $em): Response
+    {
+        $comments = new Comments();
+
+        $form = $this->createForm(CommentsType::class, $comments);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $comments->setUser($this->getUser())
+                     ->setArticles($article);
+            $em->persist($comments);
+            $em->flush();
+
+            $this->addFlash('succes', 'Le commentaire a été ajouté');
+
+            return $this->redirectToRoute('app_blog_article_show', [
+                'id' => $article->getId()
+            ]);
+        }
+
+        return $this->render('article/show_in_blog.html.twig', [
+            'article' => $article,
+            'form' => $form->createView()
+        ]);
     }
 }
