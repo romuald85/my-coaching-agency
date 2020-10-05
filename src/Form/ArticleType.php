@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ArticleType extends AbstractType
 {
@@ -14,15 +15,22 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('imageFile', VichImageType::class, [
-                'label' => 'Image (JPG or PNG file)',
+                'label' => 'Image (JPG ou PNG)',
                 'required' => false,
                 'allow_delete' => true,
                 'delete_label' => 'delete',
                 'download_uri' => false,
                 'imagine_pattern' => 'squared_thumbnail_small'
         ])
-            ->add('title')
-            ->add('description')
+            ->add('title', TextType::class, [
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'titre'
+                ]
+            ])
+            ->add('description', TextType::class, [
+                'label' => false
+            ])
         ;
     }
 

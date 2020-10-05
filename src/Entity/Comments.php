@@ -43,6 +43,11 @@ class Comments
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $approveComment;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +97,18 @@ class Comments
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getApproveComment(): ?bool
+    {
+        return $this->approveComment;
+    }
+
+    public function setApproveComment(bool $approveComment): self
+    {
+        $this->approveComment = $approveComment;
 
         return $this;
     }
