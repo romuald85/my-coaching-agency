@@ -26,8 +26,10 @@
                         <h2 class="text-capitalize">Commentaires</h2>
                         <div>
                             {% for comment in article.comments|sort|reverse %}
-                                <p><small><b>{{comment.author}} </b><time datetime="{{comment.createdAt|date('d-m-Y H:i:s')}}">{{comment.createdAt|ago}}</time></small></p>
-                                <p>{{comment.comment}}</p>
+                                {% if comment.approveComment == true %}
+                                    <p><small><b>{{comment.author}} </b><time datetime="{{comment.createdAt|date('d-m-Y H:i:s')}}">{{comment.createdAt|ago}}</time></small></p>
+                                    <p>{{comment.comment}}</p>
+                                {% endif %}
                             {% endfor %}
                         </div>
                         <hr>

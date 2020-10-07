@@ -1,24 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
-{% block title article.title %}
+{% block title %}Modération des commentaires{% endblock %}
 
 {% block body %}
-    <div class="container" style="margin-top:100px;">
+    <h1 class="mt-5">Modération des commentaires</h1>
+    {% for comment in article.comments|sort|reverse %}
+        <div class="container">
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <article class="article bg-white rounded shadow">
-                    <div class="mw-100 overflow-hidden rounded-top">
-                            <img src="{{ (article.imageName ? vich_uploader_asset(article) : asset('build/images/empty.jpg'))}}" alt="{{ article.title }}" class="w-100" />                            
-                    </div>
                     <div class="p-3">
-                        <h1 class="h5 text-secondary">{{article.title}}</h1>
-                        <p class="class-muted">
-                            <small>Publié <time datetime="{{article.createdAt|date('d-m-Y H:i:s')}}">{{article.createdAt|ago}}</time> par {{article.user.fullName}}</small>
-                        </p>
-                        <p class="text-break pt-3">
-                            {{article.description}}
-                        </p>
-                        <div class="pt-3">
+                        <p><small><b>{{comment.author}} </b><time datetime="{{comment.createdAt|date('d-m-Y H:i:s')}}">{{comment.createdAt|ago}}</time></small></p>
+                        <p>{{comment.comment}}</p>
+                        {#<div class="pt-3">
                             <a href="{{path('app_article_edit', {id:article.id})}}" class="btn btn-light">Modifier</a>
                             <a href="#" onclick="event.preventDefault(); confirm('Confirmer la suppression') && document.getElementById('js_article_delete').submit()" class="btn btn-light">Supprimer</a>
                             <form id="js_article_delete" action="{{path('app_article_delete', {id:article.id})}}" method="POST" style="display:none;">
@@ -26,10 +20,12 @@
                                 <input type="hidden" name="_method" value="DELETE">
                             </form>
                             <a href="{{path('app_comments_approve', {id:article.id})}}">Commentaires</a>
-                        </div>
+                        </div>#}
                     </div>
                 </article>
+                <hr>
             </div>
         </div>
     </div>
+    {% endfor %}
 {% endblock %}
