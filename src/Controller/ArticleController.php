@@ -127,6 +127,7 @@ class ArticleController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $comments->setUser($this->getUser())
                      ->setArticles($article)
+                     ->setApproveComment(false)
                      ->setAuthor($user->getfullName());
             $em->persist($comments);
             $em->flush();
