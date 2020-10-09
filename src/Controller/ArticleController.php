@@ -132,7 +132,7 @@ class ArticleController extends AbstractController
             $em->persist($comments);
             $em->flush();
 
-            $this->addFlash('succes', 'Le commentaire a été ajouté');
+            $this->addFlash('success', 'Le commentaire est en attente de validation auprès du modérateur');
 
             return $this->redirectToRoute('app_blog_article_show', [
                 'id' => $article->getId()
