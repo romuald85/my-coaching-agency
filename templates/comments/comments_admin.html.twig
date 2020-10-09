@@ -15,10 +15,6 @@
                                 <p>{{comment.comment}}</p>
                                 <div class="pt-3">
                                     <a href="{{path('app_comments_approve', {id:comment.id})}}" class="btn btn-light">Approuver</a>
-                                    {#<form id="js_comment_approve" action="{{path('app_comments_approve', {id:comment.id})}}" method="POST" style="display:none;">
-                                        <input type="hidden" name="csrf_token" value="{{csrf_token('comment_deletion_' ~ comment.id)}}">
-                                        <input type="hidden" name="_method" value="POST">
-                                    </form>#}
                                     <a href="#" onclick="confirm('Confirmer la suppression') && document.getElementById('js_comment_delete').submit()" class="btn btn-light">Supprimer</a>
                                     <form id="js_comment_delete" action="{{path('app_comments_delete', {id:comment.id})}}" method="POST" style="display:none;">
                                         <input type="hidden" name="csrf_token" value="{{csrf_token('comment_deletion_' ~ comment.id)}}">

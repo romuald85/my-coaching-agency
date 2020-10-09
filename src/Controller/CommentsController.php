@@ -42,7 +42,7 @@ class CommentsController extends AbstractController
             $em->persist($comment);
             $em->flush();
 
-            $this->AddFlash('success', "Le commentaire de {$this->getUser()->getfullName()} a bien été approuvé");
+            $this->AddFlash('success', "Le commentaire #{$comment->getId()} de {$this->getUser()->getfullName()} a bien été approuvé");
 
             return $this->redirectToRoute('app_comments_admin', [
                 'id' => $comment->getArticles()->getId()

@@ -37,7 +37,8 @@ class EditUserType extends AbstractType
                 'choices' => [
                     'Administrateur' => 'ROLE_ADMIN',
                     'Éditeur' => 'ROLE_EDITOR',
-                    'Utilisateur' => 'ROLE_USER'
+                    'Utilisateur' => 'ROLE_USER',
+                    'Modérateur' => 'ROLE_MODERATOR'
                 ],
                 'label' => 'Changer le rôle de l\'utilisateur',
                 'required' => true,
