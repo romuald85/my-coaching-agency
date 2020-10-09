@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Comments;
+use App\Form\ApproveCommentType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,13 +24,27 @@ class CommentsController extends AbstractController
     }
 
     /**
-     * @Route("/article/{id<[0-9]+>}/comments_approve", name="app_comments_approve", methods={"GET", "POST"})
+     * @Route("/article/{id<[0-9]+>}/comments_admin", name="app_comments_admin", methods={"GET", "POST"})
      */
-    public function approveComment(Article $article)
+    public function showCommentInAdmin(Article $article)
     {
-        return $this->render('comments/approve.html.twig', [
+        return $this->render('comments/comments_admin.html.twig', [
             'article' => $article
         ]);
+    }
+
+    /**
+     * @Route("/{id<[0-9]+>}/comments_approve", name="app_comments_approve", methods={"GET", "POST"})
+     */
+    public function approveComment(Comments $comment, EntityManagerInterface $em): Response
+    {
+            $comment->setApproveComment(true);
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute('app_comments_admin', [
+                'id' => $comment->getArticles()->getId()
+            ]);
     }
 
     /**
@@ -44,7 +59,7 @@ class CommentsController extends AbstractController
             $this->addFlash('success', 'Le commentaire a bien été supprimé');
         }
 
-        return $this->redirectToRoute('app_comments_approve', [
+        return $this->redirectToRoute('app_comments_admin', [
             'id' => $comment->getArticles()->getId()
         ]);
     }

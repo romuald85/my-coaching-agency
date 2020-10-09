@@ -25,7 +25,7 @@
                                 <input type="hidden" name="csrf_token" value="{{csrf_token('article_deletion_' ~ article.id)}}">
                                 <input type="hidden" name="_method" value="DELETE">
                             </form>
-                            <a href="{{path('app_comments_approve', {id:article.id})}}" class="btn btn-light">Commentaires</a>
+                            <a href="{{path('app_comments_admin', {id:article.id})}}" class="btn btn-light">Commentaires</a>
                         </div>
                     </div>
                 </article>
