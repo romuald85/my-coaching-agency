@@ -13,7 +13,6 @@
                         <p><small><b>{{comment.author}} </b><time datetime="{{comment.createdAt|date('d-m-Y H:i:s')}}">{{comment.createdAt|ago}}</time></small></p>
                         <p>{{comment.comment}}</p>
                         <div class="pt-3">
-                            {#<a href="{{path('app_comments_delete', {id:comment.id})}}" class="btn btn-light">Supprimer</a>#}
                             <a href="#" onclick="confirm('Confirmer la suppression') && document.getElementById('js_comment_delete').submit()" class="btn btn-light">Supprimer</a>
                             <form id="js_comment_delete" action="{{path('app_comments_delete', {id:comment.id})}}" method="POST" style="display:none;">
                                 <input type="hidden" name="csrf_token" value="{{csrf_token('comment_deletion_' ~ comment.id)}}">

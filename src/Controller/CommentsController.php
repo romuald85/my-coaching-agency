@@ -37,11 +37,12 @@ class CommentsController extends AbstractController
      */
     public function deleteComment(Comments $comment, EntityManagerInterface $em)
     {
-        //dd($comment->getArticles());
         $em->remove($comment);
         $em->flush();
 
-        return $this->redirectToRoute('app_article');
+        return $this->redirectToRoute('app_comments_approve', [
+            'id' => $comment->getArticles()->getId()
+        ]);
         /*if($this->isCsrfTokenValid('comment_deletion_' . $comment->getId(), $request->request->get('csrf_token'))){
             $em->remove($comment);
             $em->flush();
