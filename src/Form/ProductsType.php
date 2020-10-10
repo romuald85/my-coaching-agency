@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ProductsType extends AbstractType
 {
@@ -21,8 +23,24 @@ class ProductsType extends AbstractType
                 'download_uri' => false,
                 'imagine_pattern' => 'squared_thumbnail_small'
         ])
-            ->add('title')
-            ->add('price')
+            ->add('title', TextType::class, [
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'titre'
+                ]
+            ])
+            ->add('price', TextType::class, [
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'prix'
+                ]
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'description'
+                ]
+            ])
         ;
     }
 

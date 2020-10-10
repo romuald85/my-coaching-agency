@@ -13,7 +13,6 @@
                                 <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('build/images/empty.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ product.title }}" class="w-100" />
                             </a>
                             <h2 class="h5 pl-3 pt-3"><a href="{{path('app_products_show', {id:product.id})}}" class="text-secondary text-decoration-none">{{product.title}}</a></h2>
-                            <div class="h5 pl-3 pt-3">{{product.price}}</div>
                         </div>
                     {% endfor %}
                 </div>

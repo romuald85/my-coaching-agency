@@ -52,6 +52,11 @@ class Products
      */
     private $imageFile;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,5 +115,17 @@ class Products
     public function getImageFile(): ?File
     {
         return $this->imageFile;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
     }
 }

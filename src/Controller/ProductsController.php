@@ -36,6 +36,8 @@ class ProductsController extends AbstractController
 
         $form = $this->createForm(ProductsType::class, $product);
 
+        $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()){
             $em->persist($product);
             $em->flush();
