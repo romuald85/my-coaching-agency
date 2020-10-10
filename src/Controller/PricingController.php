@@ -2,18 +2,26 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ProductsRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PricingController extends AbstractController
 {
     /**
      * @Route("/pricing", name="app_pricing")
      */
-    public function index()
+    public function index(ProductsRepository $productsRepo)
     {
+        $products = $productsRepo->findAll();
+
         return $this->render('pricing/index.html.twig', [
-            'controller_name' => 'PricingController',
+            'products' => $products
         ]);
+    }
+
+    public function showProductsInPricingPage()
+    {
+
     }
 }
