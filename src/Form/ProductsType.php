@@ -29,6 +29,12 @@ class ProductsType extends AbstractType
                     'placeholder' => 'titre'
                 ]
             ])
+            ->add('subtitle', TextType::class, [
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'sous-titre'
+                ]
+            ])
             ->add('price', TextType::class, [
                 'label' => false,
                 'attr' => [

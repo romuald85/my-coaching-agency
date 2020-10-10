@@ -1,21 +1,22 @@
 
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">Pricing</h1>
-      <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It's built with default Bootstrap components and utilities with little customization.</p>
+    <div class="pricing-header mt-5 px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h1 class="mt-5 mb-5 display-4">Pricing</h1>
+      <p class="mt-5 mb-5 lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It's built with default Bootstrap components and utilities with little customization.</p>
     </div>
 
-    <div class="container">
+    <div class="mt-5 mb-5 container">
       <div class="card-deck mb-3 text-center">
         {% for product in products %}
             <div class="card mb-4 box-shadow">
             <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{product.title}}</h4>
+            </div>
+            <div class="card-body">
                 <a href="#">
                     <img class="card-img-top" src="{{ (product.imageName ? vich_uploader_asset(product) : asset('build/images/empty.jpg'))}}" alt="{{product.title}}">
                 </a>
                 <h1 class="card-title pricing-card-title">{{product.price}} €<small class="text-muted">/ mois</small></h1>
-                <h4 class="my-0 font-weight-normal">{{product.title}}</h4>
-            </div>
-            <div class="card-body">
+                <h4 class="my-0 font-weight-normal">{{product.subtitle}}</h4>
                 <p>{{product.description}}</p>
                 <a href="#" class="btn btn-lg btn-block btn-primary">En savoir plus</a>
             </div>
