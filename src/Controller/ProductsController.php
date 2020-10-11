@@ -54,6 +54,7 @@ class ProductsController extends AbstractController
     }
 
     /**
+     * Affiche le produit côté admin
      * @Route("/admin/products/{id<[0-9]+>}", name="app_products_show", methods="GET")
      */
     public function show(Products $products): Response
