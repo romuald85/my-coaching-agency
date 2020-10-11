@@ -47,6 +47,9 @@ class ProductsType extends AbstractType
                     'placeholder' => 'description'
                 ]
             ])
+            ->add('bigDescription', TextareaType::class, [
+                'label' => false
+            ])
         ;
     }
 

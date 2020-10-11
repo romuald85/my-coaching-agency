@@ -62,6 +62,11 @@ class Products
      */
     private $subtitle;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $bigDescription;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -142,6 +147,18 @@ class Products
     public function setSubtitle(string $subtitle): self
     {
         $this->subtitle = $subtitle;
+
+        return $this;
+    }
+
+    public function getBigDescription(): ?string
+    {
+        return $this->bigDescription;
+    }
+
+    public function setBigDescription(string $bigDescription): self
+    {
+        $this->bigDescription = $bigDescription;
 
         return $this;
     }
