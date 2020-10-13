@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
 {% block title %}Mon panier{% endblock %}
 
 {% block body %}
-  <h1 class="mt-5 mb-5 text-center">Votre panier</h1>
   <div class="container">
+    <h1 class="mt-5">Mon panier</h1>
     {% if items | length > 0 %}
       <table class="table">
         <thead>
@@ -24,14 +24,21 @@
               <td>{{item.quantity}}</td>
               <td>{{item.product.price * item.quantity}}</td>
               <td>
-                <a href="#" class="btn btn-danger btn-small">Supprimer</a>
+                <a href="{{path('app_cart_remove', {id:item.product.id})}}" class="btn btn-danger btn-sm">Supprimer</a>
               </td>
             </tr>
           {% endfor %}
         </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="text-right">Total : </td>
+            <td>{{total}}</td>
+            <td></td>
+          </tr>
+        </tfoot>
       </table>
     {% else %}
-      <p>Il n'y a pas de produits dans le panier</p>
+      <p>Il n'y a pas encore de produits, <span>pour commencer <a href="{{path('app_pricing')}}">cliquez ici</a></span></p>
     {% endif %}
   </div>
 {% endblock %}
