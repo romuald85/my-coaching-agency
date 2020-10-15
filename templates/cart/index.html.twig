@@ -31,9 +31,17 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="3" class="text-right">Total : </td>
-            <td>{{total}}</td>
+            <td colspan="3" class="text-right">Total HT : </td>
+            <td>{{totalHT}}</td>
             <td></td>
+          </tr>
+          <tr>
+            <td colspan="3" class="text-right">TVA : </td>
+            <td>20 %</td>
+          </tr>
+          <tr>
+            <td colspan="3" class="text-right">TTC : </td>
+            <td>{{totalTTC| number_format(2)}}</td>
           </tr>
         </tfoot>
       </table>
