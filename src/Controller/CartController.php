@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Command;
+use App\Repository\CommandRepository;
 use App\Repository\ProductsRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,9 +28,12 @@ class CartController extends AbstractController
                 'quantity' => $quantity
             ];
         }
+        
+        //dd($panierWithData);
 
         $totalHT = 0;
         $totalTTC = 0;
+        $tva = 0;
 
         foreach ($panierWithData as $item){
             $totalItem = $item['product']->getPrice() * $item['quantity'];
@@ -34,11 +41,13 @@ class CartController extends AbstractController
         }
 
         $totalTTC = $totalHT * 1.2;
+        $tva = ($totalHT / 100) * 20;
 
         return $this->render('cart/index.html.twig', [
             'items' => $panierWithData,
             'totalHT' => $totalHT,
-            'totalTTC' => $totalTTC
+            'totalTTC' => $totalTTC,
+            'tva' => $tva,
         ]);
     }
 
@@ -78,5 +87,52 @@ class CartController extends AbstractController
         $this->addFlash('success', 'Le produit a bien été supprimé du panier');
 
         return $this->redirectToRoute('app_cart');
+    }
+
+    /**
+     * @Route("/command", name="app_validate_command")
+     */
+    public function validateAction(SessionInterface $session, EntityManagerInterface $em, ProductsRepository $productsRepo, CommandRepository $commandRepo): Response
+    {
+        $user = $this->getUser();
+        $command = new Command();
+
+        if(!$session->has('panier')){
+            return $this->redirectToRoute('app_cart');
+        }
+        
+        $panier = $session->get('panier', []);
+
+        $panierWithData = [];
+
+        foreach ($panier as $id => $quantity) {
+            $panierWithData[] = [
+                'product' => $productsRepo->find($id)->getTitle(),
+                'quantity' => $quantity
+            ];
+        }
+
+        $reference = $commandRepo->findOneBy(['validate' => 1], ['id' => 'DESC'], 1, 1);
+
+        $command->setName($user->getfullName())
+                ->setReference($reference->getReference() + 1)// Problème si getReference est null
+                ->setCommand($panierWithData)
+                ->setQuantity(1)
+                ->setValidate(1)
+                ->setDate(new \DateTime())
+                ->setUser($this->getUser());
+
+        $em->persist($command);
+        $em->flush();
+        //$session->remove('panier');
+
+        return $this->render('commands/index.html.twig', [
+            'items' => $panierWithData
+        ]);
+    }
+
+    public function reference()
+    {
+        
     }
 }

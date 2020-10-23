@@ -36,12 +36,18 @@
             <td></td>
           </tr>
           <tr>
-            <td colspan="3" class="text-right">TVA : </td>
-            <td>20 %</td>
+            <td colspan="3" class="text-right">TVA 20 % : </td>
+            <td>
+              {{tva|number_format(2)}}
+            </td>
           </tr>
           <tr>
             <td colspan="3" class="text-right">TTC : </td>
             <td>{{totalTTC| number_format(2)}}</td>
+          </tr>
+          <tr>
+            <td colspan="4"></td>
+            <td><a href="{{path('app_validate_command')}}">Valider mon panier</a></td>
           </tr>
         </tfoot>
       </table>
