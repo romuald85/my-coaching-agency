@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Services\GetReference;
 
 class CartController extends AbstractController
 {
@@ -92,7 +93,7 @@ class CartController extends AbstractController
     /**
      * @Route("/command", name="app_validate_command")
      */
-    public function validateAction(SessionInterface $session, EntityManagerInterface $em, ProductsRepository $productsRepo, CommandRepository $commandRepo): Response
+    public function validateAction(SessionInterface $session, EntityManagerInterface $em, ProductsRepository $productsRepo, CommandRepository $commandRepo, GetReference $getReference): Response
     {
         $user = $this->getUser();
         $command = new Command();
@@ -112,15 +113,14 @@ class CartController extends AbstractController
             ];
         }
 
-        $reference = $commandRepo->findOneBy(['validate' => 1], ['id' => 'DESC'], 1, 1);
-
         $command->setName($user->getfullName())
-                ->setReference($reference->getReference() + 1)// Problème si getReference est null
+                ->setReference($getReference->reference())
                 ->setCommand($panierWithData)
                 ->setQuantity(1)
                 ->setValidate(1)
                 ->setDate(new \DateTime())
                 ->setUser($this->getUser());
+        
 
         $em->persist($command);
         $em->flush();
@@ -129,10 +129,5 @@ class CartController extends AbstractController
         return $this->render('commands/index.html.twig', [
             'items' => $panierWithData
         ]);
-    }
-
-    public function reference()
-    {
-        
     }
 }
