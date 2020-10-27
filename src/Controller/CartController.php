@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Command;
+use App\Services\Cart\GetReference;
 use App\Repository\CommandRepository;
+use App\Controller\CommandsController;
 use App\Repository\ProductsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Services\GetReference;
 
 class CartController extends AbstractController
 {
@@ -73,6 +74,8 @@ class CartController extends AbstractController
     }
 
     /**
+     * Supprime un produit du panier
+     * 
      * @Route("/panier/supprimer/{id<[0-9]+>}", name="app_cart_remove")
      */
     public function remove($id, SessionInterface $session)
@@ -91,46 +94,14 @@ class CartController extends AbstractController
     }
 
     /**
+     * Valider le panier
+     * 
      * @Route("/command", name="app_validate_command")
      */
-    public function validateAction(SessionInterface $session, EntityManagerInterface $em, ProductsRepository $productsRepo, CommandRepository $commandRepo, GetReference $getReference): Response
+    public function validateAction(CommandsController $commandsController): Response
     {
-        $user = $this->getUser();
-        $command = new Command();
-
-        if(!$session->has('panier')){
-            return $this->redirectToRoute('app_cart');
-        }
+        $panierWithData = $commandsController->prepareCommandAction();
         
-        $panier = $session->get('panier', []);
-
-        $panierWithData = [];
-
-        foreach ($panier as $id => $quantity) {
-            $panierWithData[] = [
-                'product' => $productsRepo->find($id)->getTitle(),
-                'price' => $productsRepo->find($id)->getPrice(),
-                'prixHT' => $productsRepo->find($id)->getPrice() * $quantity,
-                'TVA' => number_format(($productsRepo->find($id)->getPrice() * $quantity) / 100 * 20, 2),
-                'prixTTC' => number_format($productsRepo->find($id)->getPrice() * $quantity + ($productsRepo->find($id)->getPrice() * $quantity) / 100 * 20, 2),
-                'quantity' => $quantity
-            ];
-        }
-
-        //dd($panierWithData);
-
-        $command->setName($user->getfullName())
-                ->setReference($getReference->reference())
-                ->setCommand($panierWithData)
-                ->setValidate(1)
-                ->setDate(new \DateTime())
-                ->setUser($this->getUser());
-        
-
-        $em->persist($command);
-        $em->flush();
-        //$session->remove('panier');
-
         return $this->render('commands/index.html.twig', [
             'items' => $panierWithData
         ]);
