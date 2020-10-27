@@ -109,9 +109,15 @@ class CartController extends AbstractController
         foreach ($panier as $id => $quantity) {
             $panierWithData[] = [
                 'product' => $productsRepo->find($id)->getTitle(),
+                'price' => $productsRepo->find($id)->getPrice(),
+                'prixHT' => $productsRepo->find($id)->getPrice() * $quantity,
+                'TVA' => number_format(($productsRepo->find($id)->getPrice() * $quantity) / 100 * 20, 2),
+                'prixTTC' => number_format($productsRepo->find($id)->getPrice() * $quantity + ($productsRepo->find($id)->getPrice() * $quantity) / 100 * 20, 2),
                 'quantity' => $quantity
             ];
         }
+
+        //dd($panierWithData);
 
         $command->setName($user->getfullName())
                 ->setReference($getReference->reference())
