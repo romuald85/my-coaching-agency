@@ -26,11 +26,6 @@ class Command
     private $reference;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $quantity;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Products::class)
      */
     private $products;
@@ -79,18 +74,6 @@ class Command
     public function setReference(int $reference): self
     {
         $this->reference = $reference;
-
-        return $this;
-    }
-
-    public function getQuantity(): ?int
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(int $quantity): self
-    {
-        $this->quantity = $quantity;
 
         return $this;
     }

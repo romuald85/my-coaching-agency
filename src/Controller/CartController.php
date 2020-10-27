@@ -122,7 +122,6 @@ class CartController extends AbstractController
         $command->setName($user->getfullName())
                 ->setReference($getReference->reference())
                 ->setCommand($panierWithData)
-                ->setQuantity(1)
                 ->setValidate(1)
                 ->setDate(new \DateTime())
                 ->setUser($this->getUser());
