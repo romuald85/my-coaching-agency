@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Cart;
 
 use App\Repository\CommandRepository;
 
 class GetReference
 {
-    private $commandRepo;
+    protected $commandRepo;
 
     public function __construct(CommandRepository $commandRepo)
     {
