@@ -58,7 +58,7 @@ class CartServices
 
     public function getTotal()
     {
-        /*$totalHT = 0;
+        $totalHT = 0;
         $totalTTC = 0;
         $tva = 0;
 
@@ -70,6 +70,6 @@ class CartServices
         $totalTTC = $totalHT * 1.2;
         $tva = ($totalHT / 100) * 20;
 
-        return [$totalHT, $totalTTC, $tva];*/
+        return [$totalHT, $totalTTC, $tva];
     }
 }
