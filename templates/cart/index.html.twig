@@ -51,9 +51,9 @@
           </tr>
         </tfoot>
       </table>
+      <a href="{{path('app_pricing')}}" class="btn btn_light">&lt Continuer mes achats</a>
     {% else %}
       <p>Il n'y a pas encore de produits, <span>pour commencer <a href="{{path('app_pricing')}}">cliquez ici</a></span></p>
     {% endif %}
-    <a href="{{path('app_pricing')}}" class="btn btn_light">&lt Continuer mes achats</a>
   </div>
 {% endblock %}

@@ -38,6 +38,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/panier, roles: ROLE_USER}
         - { path: ^/article, roles: ROLE_EDITOR}
         - { path: ^/comments_admin, roles: ROLE_MODERATOR }
 
