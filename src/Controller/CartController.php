@@ -4,24 +4,27 @@ namespace App\Controller;
 
 use App\Services\Cart\CartServices;
 use App\Controller\CommandsController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 class CartController extends AbstractController
 {
     /**
      * @Route("/panier", name="app_cart")
      */
-    public function index(CartServices $cartServices)
+    public function index(CartServices $cartServices, SessionInterface $session, CommandsController $commandsController)
     {
-        $panierWithData = $cartServices->getFullCart();
+        $panierWithData = $cartServices->getFullCart($this->getUser());
         
-        $totalHT = $cartServices->getTotal()[0];
-        $totalTTC = $cartServices->getTotal()[1];
-        $tva = $cartServices->getTotal()[2];
+        $totalHT = $cartServices->getTotal($this->getUser())[0];
+        $totalTTC = $cartServices->getTotal($this->getUser())[1];
+        $tva = $cartServices->getTotal($this->getUser())[2];
 
-
+        
         return $this->render('cart/index.html.twig', [
             'items' => $panierWithData,
             'totalHT' => $totalHT,
@@ -29,13 +32,13 @@ class CartController extends AbstractController
             'tva' => $tva,
         ]);
     }
-
+    
     /**
      * @Route("/panier/ajouter/{id<[0-9]+>}", name="app_cart_add")
      */
     public function add($id, CartServices $cartServices)
     {
-        $cartServices->addProductToCart($id);
+        $cartServices->addProductToCart($this->getUser(), $id);
 
         $this->addFlash('success', 'Le produit a bien été ajouté au panier');
 
@@ -49,7 +52,7 @@ class CartController extends AbstractController
      */
     public function remove($id, CartServices $cartServices)
     {
-        $cartServices->removeProductToCart($id);
+        $cartServices->removeProductToCart($this->getUser(), $id);
 
         $this->addFlash('success', 'Le produit a bien été supprimé du panier');
 
@@ -63,10 +66,10 @@ class CartController extends AbstractController
      */
     public function validateAction(CommandsController $commandsController): Response
     {
-        $panierWithData = $commandsController->prepareCommandAction();
+        $commandsController->prepareCommandAction();
 
         return $this->render('commands/index.html.twig', [
-            'items' => $panierWithData
+            'items' => $this->getUser()->getCart()
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Command;
+use App\Entity\CartPersist;
 use App\Services\Cart\GetReference;
 use App\Repository\CommandRepository;
 use App\Repository\ProductsRepository;
@@ -17,6 +18,7 @@ class CommandsController extends AbstractController
     protected $productsRepo;
     protected $commandRepo;
     protected $getReference;
+    protected $request;
 
     public function __construct(SessionInterface $session, EntityManagerInterface $em, ProductsRepository $productsRepo, CommandRepository $commandRepo, GetReference $getReference)
     {
@@ -32,15 +34,11 @@ class CommandsController extends AbstractController
         $user = $this->getUser();
         $command = new Command();
 
-        if(!$this->session->has('panier')){
-            return $this->redirectToRoute('app_cart');
-        }
-        
-        $panier = $this->session->get('panier', []);
+        $panier = $user->getCart();        
 
         $panierWithData = [];
 
-        foreach ($panier as $id => $quantity) {
+        foreach ($panier->getContent() as $id => $quantity) {
             $panierWithData[] = [
                 'product' => $this->productsRepo->find($id)->getTitle(),
                 'price' => $this->productsRepo->find($id)->getPrice(),
@@ -59,12 +57,11 @@ class CommandsController extends AbstractController
                 ->setUser($this->getUser());
         
 
+        $panier->setContent([]);
+                
         $this->em->persist($command);
+        $this->em->persist($panier);
         $this->em->flush();
 
-        //$this->session->remove('panier');
-
-
-        return $panierWithData;
     }
 }

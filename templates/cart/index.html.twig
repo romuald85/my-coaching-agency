@@ -5,7 +5,6 @@
 {% block body %}
   <div class="container">
     <h1 class="mt-5">Mon panier</h1>
-    {% if items | length > 0 %}
       <table class="table">
         <thead>
           <tr>
@@ -17,6 +16,7 @@
           </tr>
         </thead>
         <tbody>
+    {% if items | length > 0 %}
           {% for item in items %}
             <tr>
               <td>{{item.product.title}}</td>
@@ -53,7 +53,11 @@
       </table>
       <a href="{{path('app_pricing')}}" class="btn btn_light">&lt Continuer mes achats</a>
     {% else %}
-      <p>Il n'y a pas encore de produits, <span>pour commencer <a href="{{path('app_pricing')}}">cliquez ici</a></span></p>
+    <tr>
+      <td>
+        Il n'y a pas encore de produits, <span>pour commencer <a href="{{path('app_pricing')}}">cliquez ici</a></span>
+      </td>
+    </tr>
     {% endif %}
   </div>
 {% endblock %}

@@ -2,67 +2,88 @@
 
 namespace App\Services\Cart;
 
+use App\Entity\CartPersist;
 use App\Repository\ProductsRepository;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\CartPersistRepository;
 
 class CartServices
 {
-    protected $session;
     protected $productsRepo;
+    protected $cartRepo;
+    protected $em;
 
-    public function __construct(SessionInterface $session, ProductsRepository $productsRepo)
+    public function __construct(ProductsRepository $productsRepo, CartPersistRepository $cartRepo, EntityManagerInterface $em)
     {
-        $this->session = $session;
         $this->productsRepo = $productsRepo;
+        $this->cartRepo = $cartRepo;
+        $this->em = $em;
     }
 
-    public function addProductToCart($id)
-    {
-        $panier = $this->session->get('panier', []);
 
-        if(!empty($panier[$id])){
-            $panier[$id]++;
+    public function addProductToCart($user, $id)
+    {
+        // Récupérer le panier de l'utilisateur connecté
+        $panier = ($user->getCart()) ? $user->getCart() : $user->setCart(new CartPersist())->getCart();
+
+        // Récuperer le contenu du panier
+        $content = $panier->getContent();
+
+        // Vérifier si le produit existe déjà dans le panier
+        if(isset($content[$id])){
+            $content[$id]++;
         }else{
-            $panier[$id] = 1;
+            $content[$id] = 1;
         }
-
-        $this->session->set('panier', $panier);
+        
+        // On sauvegarde le contenu dans le panier
+        $panier->setContent($content);
+        $this->em->persist($panier);
+        $this->em->flush();
     }
 
-    public function removeProductToCart($id)
+    public function removeProductToCart($user, $id)
     {
-        $panier = $this->session->get('panier', []);
+        $panier = ($user->getCart()) ? $user->getCart() : $user->setCart(new CartPersist())->getCart();
 
-        if (!empty($panier[$id])){
-            unset($panier[$id]);
+        $content = $panier->getContent();
+
+        if(isset($content[$id])){
+            $content[$id]--;
         }
 
-        $this->session->set('panier', $panier);
+        if($content[$id] == 0){
+            unset($content[$id]);
+        }
+
+        $panier->setContent($content);
+        $this->em->persist($panier);
+        $this->em->flush();
     }
 
-    public function getFullCart()
+    public function getFullCart($user)
     {
-        $panier = $this->session->get('panier', []);
+        $panier = ($user->getCart()) ? $user->getCart() : $user->setCart(new CartPersist())->getCart();
 
         $panierWithData = [];
         
-        foreach ($panier as $id => $quantity){
+        
+        foreach ($panier->getContent() as $id => $quantity){
             $panierWithData[] = [
                 'product' => $this->productsRepo->find($id),
                 'quantity' => $quantity
             ];
         }
-
         return $panierWithData;
     }
 
-    public function getTotal()
+    public function getTotal($user)
     {
         $totalHT = 0;
         $totalTTC = 0;
         $tva = 0;
 
-        foreach ($this->getFullCart() as $item){
+        foreach ($this->getFullCart($user) as $item){
             $totalItem = $item['product']->getPrice() * $item['quantity'];
             $totalHT += $totalItem;
         }
