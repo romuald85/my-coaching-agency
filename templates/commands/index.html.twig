@@ -3,10 +3,5 @@
 {% block title %}Hello CommandsController!{% endblock %}
 
 {% block body %}
-    <h1>Commande</h1>
-
-    {#{% for item in items %}
-        <p>{{item.product}}</p>
-        <p>{{item.quantity}}</p>
-    {% endfor %}#}
+    {{include('layouts/partials/_command_validate.html.twig')}}
 {% endblock %}
