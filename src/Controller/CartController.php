@@ -2,9 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Bill;
+use App\Form\BillType;
 use App\Services\Cart\CartServices;
 use App\Controller\CommandsController;
+use App\Repository\ProductsRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -62,14 +67,58 @@ class CartController extends AbstractController
     /**
      * Valider le panier
      * 
-     * @Route("/command", name="app_validate_command")
+     * @Route("/command", name="app_validate_command", methods={"GET", "POST"})
      */
-    public function validateAction(CommandsController $commandsController): Response
+    public function validateAction(CartServices $cartServices, CommandsController $commandsController, EntityManagerInterface $em, Request $request, ProductsRepository $productsRepo): Response
     {
-        $commandsController->prepareCommandAction();
+        
+        $user = $this->getUser();
+        $bill = new Bill();
+        
+        
+        $form = $this->createForm(BillType::class, $bill, [
+            'method' => 'POST'
+            ]);
+            
+            $form->handleRequest($request);
+            
+            $panier = $user->getCart();
+            
+            $totalHT = $cartServices->getTotal($this->getUser())[0];
+            $totalTTC = $cartServices->getTotal($this->getUser())[1];
+            $tva = $cartServices->getTotal($this->getUser())[2];
+
+        $panierWithData = [];
+
+        foreach ($panier->getContent() as $id => $quantity) {
+            $panierWithData[] = [
+                'product' => $productsRepo->find($id)->getTitle(),
+                'price' => $productsRepo->find($id)->getPrice(),
+                'prixHT' => $productsRepo->find($id)->getPrice() * $quantity,
+                'TVA' => number_format(($productsRepo->find($id)->getPrice() * $quantity) / 100 * 20, 2),
+                'prixTTC' => number_format($productsRepo->find($id)->getPrice() * $quantity + ($productsRepo->find($id)->getPrice() * $quantity) / 100 * 20, 2),
+                'quantity' => $quantity
+            ];
+        }
+            
+            
+        if($form->isSubmitted() && $form->isValid()){
+            $bill->setProducts($panierWithData);
+                
+            $em->persist($bill);
+            $em->flush();
+
+            $commandsController->prepareCommandAction();// valider la commande préparée de la page panier
+
+            return $this->redirectToRoute('app_profile');
+        }
 
         return $this->render('commands/index.html.twig', [
-            'items' => $this->getUser()->getCart()
+            'items' => $panierWithData,
+            'totalHT' => $totalHT,
+            'totalTTC' => $totalTTC,
+            'tva' => $tva,
+            'form' => $form->createView()
         ]);
     }
 }

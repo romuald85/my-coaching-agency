@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\BillRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=BillRepository::class)
@@ -19,26 +21,45 @@ class Bill
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     *  @Assert\Length(
+     *      min = 2,
+     *      max = 15,
+     *      minMessage = "Votre nom doit comporter au minimum {{ limit }} caractères",
+     *      maxMessage = "Votre nom doit comporter au maximum {{ limit }} caractères",
+     *      allowEmptyString = false
+     * )
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 20,
+     *      minMessage = "Votre prénom doit comporter au minimum {{ limit }} caractères",
+     *      maxMessage = "Votre prénom doit comporter au maximum {{ limit }} caractères",
+     *      allowEmptyString = false
+     * )
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $adress;
 
@@ -49,13 +70,27 @@ class Bill
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 5,
+     *      minMessage = "Le code postal doit comporter 5 {{ limit }} caractères",
+     *      maxMessage = "Votre prénom doit comporter 5 {{ limit }} caractères",
+     * )
      */
     private $postalCode;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $town;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $products = [];
+
 
     public function getId(): ?int
     {
@@ -154,6 +189,18 @@ class Bill
     public function setTown(string $town): self
     {
         $this->town = $town;
+
+        return $this;
+    }
+
+    public function getProducts(): ?array
+    {
+        return $this->products;
+    }
+
+    public function setProducts(array $products): self
+    {
+        $this->products = $products;
 
         return $this;
     }

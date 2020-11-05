@@ -80,7 +80,6 @@ class User implements UserInterface
     public function __construct()
     {
         $this->articles = new ArrayCollection();
-        $this->commands = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
@@ -234,36 +233,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Command[]
-     */
-    public function getCommands(): Collection
-    {
-        return $this->commands;
-    }
-
-    public function addCommand(Command $command): self
-    {
-        if (!$this->commands->contains($command)) {
-            $this->commands[] = $command;
-            $command->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommand(Command $command): self
-    {
-        if ($this->commands->contains($command)) {
-            $this->commands->removeElement($command);
-            // set the owning side to null (unless already changed)
-            if ($command->getUser() === $this) {
-                $command->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Comments[]
@@ -310,6 +279,26 @@ class User implements UserInterface
         if ($cart->getUser() !== $newUser) {
             $cart->setUser($newUser);
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of commands
+     */ 
+    public function getCommands()
+    {
+        return $this->commands;
+    }
+
+    /**
+     * Set the value of commands
+     *
+     * @return  self
+     */ 
+    public function setCommands($commands)
+    {
+        $this->commands = $commands;
 
         return $this;
     }

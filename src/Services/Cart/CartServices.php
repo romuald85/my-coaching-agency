@@ -29,6 +29,7 @@ class CartServices
         // Récuperer le contenu du panier
         $content = $panier->getContent();
 
+
         // Vérifier si le produit existe déjà dans le panier
         if(isset($content[$id])){
             $content[$id]++;
