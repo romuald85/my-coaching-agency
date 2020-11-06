@@ -28,7 +28,6 @@ class CartController extends AbstractController
         $totalHT = $cartServices->getTotal($this->getUser())[0];
         $totalTTC = $cartServices->getTotal($this->getUser())[1];
         $tva = $cartServices->getTotal($this->getUser())[2];
-
         
         return $this->render('cart/index.html.twig', [
             'items' => $panierWithData,
@@ -83,6 +82,8 @@ class CartController extends AbstractController
             $form->handleRequest($request);
             
             $panier = $user->getCart();
+
+            $quantityItems = array_sum($this->getUser()->getCart()->getContent());// Calcul la somme des valeurs d'un tableau associatif pour afficher la somme des produits dans mon panier
             
             $totalHT = $cartServices->getTotal($this->getUser())[0];
             $totalTTC = $cartServices->getTotal($this->getUser())[1];
@@ -101,7 +102,6 @@ class CartController extends AbstractController
             ];
         }
             
-            
         if($form->isSubmitted() && $form->isValid()){
             $bill->setProducts($panierWithData);
                 
@@ -118,6 +118,7 @@ class CartController extends AbstractController
             'totalHT' => $totalHT,
             'totalTTC' => $totalTTC,
             'tva' => $tva,
+            'quantityItems' => $quantityItems,
             'form' => $form->createView()
         ]);
     }
