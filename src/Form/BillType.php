@@ -45,10 +45,10 @@ class BillType extends AbstractType
                 'label' => 'Code postal',
             ])
             
-            ->add('submit', SubmitType::class, [
+            /*->add('submit', SubmitType::class, [
                 'attr' => ['class' => 'btn-block btn-primary'],
                 'label' => 'Envoyer'
-            ])
+            ])*/
         ;
     }
 

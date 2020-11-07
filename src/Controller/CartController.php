@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Bill;
 use App\Form\BillType;
 use App\Services\Cart\CartServices;
+use App\Controller\PaymentController;
 use App\Controller\CommandsController;
 use App\Repository\ProductsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -68,7 +69,7 @@ class CartController extends AbstractController
      * 
      * @Route("/command", name="app_validate_command", methods={"GET", "POST"})
      */
-    public function validateAction(CartServices $cartServices, CommandsController $commandsController, EntityManagerInterface $em, Request $request, ProductsRepository $productsRepo): Response
+    public function validateAction(CartServices $cartServices, CommandsController $commandsController, EntityManagerInterface $em, Request $request, ProductsRepository $productsRepo, PaymentController $paymentController): Response
     {
         
         $user = $this->getUser();
@@ -108,9 +109,11 @@ class CartController extends AbstractController
             $em->persist($bill);
             $em->flush();
 
+            //$paymentController->checkout();
+
             $commandsController->prepareCommandAction();// valider la commande préparée de la page panier
 
-            return $this->redirectToRoute('app_profile');
+            return $this->redirectToRoute('app_payment');
         }
 
         return $this->render('commands/index.html.twig', [
