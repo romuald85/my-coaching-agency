@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Services\Cart\CartServices;
+use App\Controller\CommandsController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -30,8 +31,9 @@ class PaymentController extends AbstractController
     /**
      *  @Route("/checkout-success", name="app_checkout_success")
      */
-    public function checkoutSuccess()
+    public function checkoutSuccess(CommandsController $commandsController)
     {
+        $commandsController->prepareCommandAction();// valider la commande préparée de la page panier une fois arrivé sur la page succès après le paiement et vide le panier en bdd
         header("Refresh:3;url=/profile");
         return $this->render('payment/checkout_success.html.twig', [
             'controller_name' => 'PaymentController',
@@ -54,6 +56,8 @@ class PaymentController extends AbstractController
      */
     public function checkout()
     {
+        $amount = number_format(ceil($this->cartServices->getTotal($this->getUser())[1]));
+
         \Stripe\Stripe::setApiKey('sk_test_51HkbkUJ8dOcVTGaBuQyumQqHAOphnYwqKAgx5A5xXuelh5rWCwCirV9ssZr7gEduJiSSIe3ffyPMMv6KqwLJYccX006KhsHZU7');
 
         $session = \Stripe\Checkout\Session::create([
@@ -62,9 +66,9 @@ class PaymentController extends AbstractController
               'price_data' => [
                 'currency' => 'eur',
                 'product_data' => [
-                  'name' => 'Programme',
+                  'name' => 'Programme sportif',
                 ],
-                'unit_amount' => 2000,
+                'unit_amount' =>  $amount * 100,
               ],
               'quantity' => 1,
             ]],

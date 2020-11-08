@@ -2,8 +2,19 @@
 
 {% block title %}Paiement{% endblock %}
 
+{% block stylesheets %}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  <link rel="stylesheet" href="{{asset('css/stripe.css')}}">
+{% endblock %}
+
 {% block body %}
-    <button class="mt-5" id="checkout-button">Checkout</button>
+  <form id="payment-form">
+      <button id="checkout-button">
+        <div class="spinner hidden" id="spinner"></div>
+        <span id="button-text">Payer</span>
+      </button>
+    </form>
 {% endblock %}
 
 {% block javascripts %}
@@ -38,3 +49,6 @@
       });
     </script>
 {% endblock %}
+
+
+
