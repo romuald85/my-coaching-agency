@@ -109,8 +109,6 @@ class CartController extends AbstractController
             $em->persist($bill);
             $em->flush();
 
-            //$commandsController->prepareCommandAction();// valider la commande préparée de la page panier
-
             return $this->redirectToRoute('app_payment');
         }
 

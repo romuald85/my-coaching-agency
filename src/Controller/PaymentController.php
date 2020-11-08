@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\BillRepository;
 use App\Services\Cart\CartServices;
 use App\Controller\CommandsController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -34,7 +36,9 @@ class PaymentController extends AbstractController
     public function checkoutSuccess(CommandsController $commandsController)
     {
         $commandsController->prepareCommandAction();// valider la commande préparée de la page panier une fois arrivé sur la page succès après le paiement et vide le panier en bdd
+
         header("Refresh:3;url=/profile");
+
         return $this->render('payment/checkout_success.html.twig', [
             'controller_name' => 'PaymentController',
         ]);
@@ -43,9 +47,15 @@ class PaymentController extends AbstractController
     /**
      *  @Route("/checkout-error", name="app_checkout_error")
      */
-    public function checkoutError()
+    public function checkoutError(EntityManagerInterface $em, BillRepository $billRepository)
     {
-        header("Refresh:3;url=/create-checkout-session");
+        // Supprime la dernière facture mise en bdd
+        $bill = $billRepository->findOneBy([], ['id' => 'DESC']);
+        $em->remove($bill);
+        $em->flush();
+
+        header("Refresh:3;url=/command");
+
         return $this->render('payment/checkout_error.html.twig', [
             'controller_name' => 'PaymentController',
         ]);
