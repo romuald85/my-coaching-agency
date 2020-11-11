@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\EditUserType;
 use App\Repository\UserRepository;
+use App\Repository\CommandRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -54,6 +55,18 @@ class AdminController extends AbstractController
 
         return $this->render('admin/edit_users.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/command/{id<[0-9]+>}", name="app_admin_command")
+     */
+    public function usersListCommand(CommandRepository $commandRepository)
+    {
+        $commands = $commandRepository->findBy([ ]);
+
+        return $this->render('admin/command_user.html.twig', [
+            'commands' => $commands
         ]);
     }
 }
