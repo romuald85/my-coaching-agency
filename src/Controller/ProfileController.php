@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\EditProfileType;
 use App\Form\EditPassWordType;
+use App\Repository\ArticleRepository;
 use App\Repository\CommandRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -93,6 +94,18 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/command_profile.html.twig', [
             'commands' => $commands
+        ]);
+    }
+
+    /**
+     * @Route("/profile/article", name="app_profile_article")
+     */
+    public function profileArticle(ArticleRepository $articleRepository)
+    {
+        $articles = $articleRepository->findAll();
+
+        return $this->render('profile/article_profile.html.twig', [
+            'articles' => $articles
         ]);
     }
 }

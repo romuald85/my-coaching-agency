@@ -16,38 +16,46 @@
                     <th scope="col">Prix total</th>
                 </thead>
                 <tbody>
-                    {% for command in commands %}
+                    {% if app.user.commands | length > 0 %}
+                        {% for command in app.user.commands %}
+                            <tr>
+                                <td>{{command.reference}}</td>
+                                <td>
+                                    {% for item in command.command %}
+                                        <li>{{item.product}}</li>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for item in command.command %}
+                                        <li>{{item.quantity}}</li>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for item in command.command %}
+                                        <li>{{item.prixHT}}</li>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for item in command.command %}
+                                        <li>{{item.TVA}}</li>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% set sum = 0 %}
+                                    {% for item in command.command %}
+                                        {% set sum = sum + item.prixTTC %}
+                                    {% endfor %}
+                                    <li>{{sum}}</li>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
                         <tr>
-                            <td>{{command.reference}}</td>
                             <td>
-                                {% for item in command.command %}
-                                    <li>{{item.product}}</li>
-                                {% endfor %}
-                            </td>
-                            <td>
-                                {% for item in command.command %}
-                                    <li>{{item.quantity}}</li>
-                                {% endfor %}
-                            </td>
-                            <td>
-                                {% for item in command.command %}
-                                    <li>{{item.prixHT}}</li>
-                                {% endfor %}
-                            </td>
-                            <td>
-                                {% for item in command.command %}
-                                    <li>{{item.TVA}}</li>
-                                {% endfor %}
-                            </td>
-                            <td>
-                                {% set sum = 0 %}
-                                {% for item in command.command %}
-                                    {% set sum = sum + item.prixTTC %}
-                                {% endfor %}
-                                <li>{{sum}}</li>
-                            </td>
+                                Vous n'avez pas encore acheté de programme, <span>pour commencer <a href="{{path('app_pricing')}}" >cliquez ici<a></span>
+                            </td> 
                         </tr>
-                    {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </div>

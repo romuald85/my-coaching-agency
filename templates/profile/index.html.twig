@@ -29,6 +29,11 @@
                 <div class="mb-5 row">
                     <div class="mt-3 col"><a href="{{path('app_profile_command')}}" class="btn btn-primary">Mes commandes</a></div>
                 </div>
+                {% if is_granted('ROLE_EDITOR') %}
+                    <div class="mb-5 row">
+                        <div class="mt-3 col"><a href="{{path('app_profile_article')}}" class="btn btn-primary">Mes articles</a></div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>   
