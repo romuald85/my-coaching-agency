@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil{% endblock %}
+{% block title %}Profil commandes{% endblock %}
 
 {% block body %}
     <div class="container-fluid">
@@ -25,6 +25,9 @@
                     <div class="col">*******</div>
                     <div class="w-100"></div>
                     <div class="mt-3 col"><a href="{{path('app_profile_editpassword')}}" class="btn btn-primary">Modifier mon mot de passe</a></div>
+                </div>
+                <div class="mb-5 row">
+                    <div class="mt-3 col"><a href="{{path('app_profile_command')}}" class="btn btn-primary">Mes commandes</a></div>
                 </div>
             </div>
         </div>

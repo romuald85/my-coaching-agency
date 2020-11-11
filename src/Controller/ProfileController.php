@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\EditProfileType;
 use App\Form\EditPassWordType;
+use App\Repository\CommandRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -80,6 +81,18 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/edit_password.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/profile/command", name="app_profile_command")
+     */
+    public function profileCommande(CommandRepository $commandRepository)
+    {
+        $commands = $commandRepository->findAll();
+
+        return $this->render('profile/command_profile.html.twig', [
+            'commands' => $commands
         ]);
     }
 }

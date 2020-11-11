@@ -50,9 +50,9 @@ class PaymentController extends AbstractController
     public function checkoutError(EntityManagerInterface $em, BillRepository $billRepository)
     {
         // Supprime la dernière facture mise en bdd
-        $bill = $billRepository->findOneBy([], ['id' => 'DESC']);
+        /*$bill = $billRepository->findOneBy([], ['id' => 'DESC']);
         $em->remove($bill);
-        $em->flush();
+        $em->flush();*/
 
         header("Refresh:3;url=/command");
 

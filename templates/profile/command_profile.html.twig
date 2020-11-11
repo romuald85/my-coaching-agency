@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des commandes{% endblock %}
+
+{% block body %}
+    <div class="my-5 container">
+        <div class="row">
+            <h1 class="my-5 mx-auto text-center">Liste des commandes</h1>
+            <table class="table table-striped">
+                <thead>
+                    <th scope="col">Référence</th>
+                    <th scope="col">Programme</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Prix Hors taxe</th>
+                    <th scope="col">TVA</th>
+                    <th scope="col">Prix total</th>
+                </thead>
+                <tbody>
+                    {% for command in commands %}
+                        <tr>
+                            <td>{{command.reference}}</td>
+                            <td>
+                                {% for item in command.command %}
+                                    <li>{{item.product}}</li>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% for item in command.command %}
+                                    <li>{{item.quantity}}</li>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% for item in command.command %}
+                                    <li>{{item.prixHT}}</li>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% for item in command.command %}
+                                    <li>{{item.TVA}}</li>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% set sum = 0 %}
+                                {% for item in command.command %}
+                                    {% set sum = sum + item.prixTTC %}
+                                {% endfor %}
+                                <li>{{sum}}</li>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
