@@ -61,9 +61,9 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/command/{id<[0-9]+>}", name="app_admin_command")
      */
-    public function usersListCommand(CommandRepository $commandRepository)
+    public function usersListCommand(CommandRepository $commandRepository, User $user)
     {
-        $commands = $commandRepository->findBy([ ]);
+        $commands = $commandRepository->findBy(['user' => $user->getId()]);
 
         return $this->render('admin/command_user.html.twig', [
             'commands' => $commands
