@@ -13,9 +13,11 @@
                     <th scope="col">Quantité</th>
                     <th scope="col">Prix Hors taxe</th>
                     <th scope="col">TVA</th>
+                    <th scope="col">prix TTC</th>
                     <th scope="col">Prix total</th>
                 </thead>
                 <tbody>
+                    {% if commands|length > 0 %}
                         {% for command in commands %}
                             <tr>
                                 <td>{{command.reference}}</td>
@@ -40,6 +42,11 @@
                                     {% endfor %}
                                 </td>
                                 <td>
+                                    {% for item in command.command %}
+                                        <li>{{item.prixTTC}}</li>
+                                    {% endfor %}
+                                </td>
+                                <td>
                                     {% set sum = 0 %}
                                     {% for item in command.command %}
                                         {% set sum = sum + item.prixTTC %}
@@ -48,11 +55,13 @@
                                 </td>
                             </tr>
                         {% endfor %}
-                        {#<tr>
+                    {% else %}
+                        <tr>
                             <td>
                                 Cet utilisateur n'a pas encore acheté de programme
                             </td> 
-                        </tr>#}
+                        </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </div>

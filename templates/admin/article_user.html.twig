@@ -3,9 +3,9 @@
 {% block title 'Listes des articles' %}
 {% block body %}
     <div class="container">
-        {% if app.user.articles|length > 0 %}
-            <h1 class="mt-5 text-center text-muted">{{ pluralize(app.user.articles|length, 'Article', 'Articles')}}</h1>
-            {% for row in app.user.articles|batch(3) %}
+        {% if articles|length > 0 %}
+            <h1 class="mt-5 text-center text-muted">{{ pluralize(articles|length, 'Article', 'Articles')}}</h1>
+            {% for row in articles|batch(3) %}
                 <div class="row mb-5">
                     {% for article in row %}
                         <div class="col-md-4">
@@ -23,7 +23,7 @@
                 </div>
             {% endfor %}
         {% else %}
-            <p class="mt-5 text-center h3" style="padding-top: 100px">Il n'y a pas encore d'article <a href="{{path('app_article_create')}}">Soyez le premier</a></p>
+            <p class="mt-5 text-center h3" style="padding-top: 100px">Il n'y a pas encore d'article</p>
         {% endif %}
     </div>
 {% endblock %}

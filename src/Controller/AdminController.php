@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\EditUserType;
 use App\Repository\UserRepository;
+use App\Repository\ArticleRepository;
 use App\Repository\CommandRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,6 +60,8 @@ class AdminController extends AbstractController
     }
 
     /**
+     * Récupère la liste de commandes de chaque users selon son id
+     * 
      * @Route("/admin/command/{id<[0-9]+>}", name="app_admin_command")
      */
     public function usersListCommand(CommandRepository $commandRepository, User $user)
@@ -67,6 +70,21 @@ class AdminController extends AbstractController
 
         return $this->render('admin/command_user.html.twig', [
             'commands' => $commands
+        ]);
+    }
+
+    /**
+     * Récupère la liste des articles de chaque users selon son id
+     * 
+     * @Route("/admin/article/{id<[0-9]+>}", name="app_admin_article")
+     */
+    public function usersListArticle(ArticleRepository $articleRepository, User $user)
+    {
+        $articles = $articleRepository->findBy(['user' => $user->getId()]);
+
+        return $this->render('admin/article_user.html.twig', [
+            'articles' => $articles,
+            'user' => $user
         ]);
     }
 }
