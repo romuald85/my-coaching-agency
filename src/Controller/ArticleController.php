@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Comments;
+use App\Entity\PostLike;
 use App\Form\ArticleType;
 use App\Form\CommentsType;
 use App\Repository\ArticleRepository;
+use App\Repository\PostLikeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -143,5 +145,56 @@ class ArticleController extends AbstractController
             'article' => $article,
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * Permet de liker ou de unliker un article
+     *
+     * @Route("/blog/{id<[0-9]+>}/like", name="app_blog_like")
+     * 
+     * @param Article $article
+     * @param EntityManagerInterface $em
+     * @param PostLikeRepository $postLikeRepo
+     * @return Response
+     */
+    public function like(Article $article, EntityManagerInterface $em, PostLikeRepository $postLikeRepo): Response
+    {
+        $user = $this->getUser();
+
+        if(!$user){
+            return $this->json([
+                'code' => 403,
+                'message' => 'Non autorisé'
+            ], 403);
+        }
+
+        if($article->isLikeByUser($user)){
+            $like = $postLikeRepo->findOneBy([
+                'post' => $article,
+                'user' => $user
+            ]);
+
+            $em->remove($like);
+            $em->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message' => 'Le like a bien été supprimé',
+                'likes' => $postLikeRepo->count(['post' => $article])
+            ], 200);
+        }
+
+        $like = new PostLike;
+        $like->setPost($article)
+             ->setUser($user);
+             
+        $em->persist($like);
+        $em->flush();
+
+        return $this->json([
+            'code' => 200, 
+            'message' => 'Le like a bien été ajoué',
+            'likes' => $postLikeRepo->count(['post' => $article  ])
+        ], 200);
     }
 }
