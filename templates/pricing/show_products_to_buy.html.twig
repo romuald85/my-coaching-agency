@@ -20,7 +20,10 @@
             <div class="card-body">
                 <h5 class="card-title">{{product.subtitle}}</h5>
                 <p class="card-text">{{product.bigDescription}}</p>
-                <a href="{{path('app_cart_add', {id:product.id})}}" class="btn btn-lg btn-block btn-primary">Ajouter au panier</a>
+                <a href="{{path('app_cart_add', {id:product.id})}}" class="btn btn-lg btn-block btn-primary">
+                    <i class="fas fa-shopping-cart"></i>
+                    Ajouter au panier
+                </a>
             </div>
         </div>
     </div>
