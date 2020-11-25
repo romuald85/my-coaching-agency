@@ -9,6 +9,7 @@
             <table class="table table-striped">
                 <thead>
                     <th scope="col">Référence</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Programme</th>
                     <th scope="col">Quantité</th>
                     <th scope="col">Prix Hors taxe</th>
@@ -20,6 +21,7 @@
                         {% for command in app.user.commands %}
                             <tr>
                                 <td>{{command.reference}}</td>
+                                <td>{{command.date|date("d/m/y")}}</td>
                                 <td>
                                     {% for item in command.command %}
                                         <li>{{item.product}}</li>
