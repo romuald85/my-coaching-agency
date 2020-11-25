@@ -21,7 +21,7 @@
                         {% for command in app.user.commands %}
                             <tr>
                                 <td>{{command.reference}}</td>
-                                <td>{{command.date|date("d/m/y")}}</td>
+                                <td>{{command.date|date("d/m/Y")}}</td>
                                 <td>
                                     {% for item in command.command %}
                                         <li>{{item.product}}</li>
