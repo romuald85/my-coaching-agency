@@ -21,7 +21,12 @@
             <tr>
               <td>{{item.product.title}}</td>
               <td>{{item.product.price}}</td>
-              <td>{{item.quantity}}</td>
+              <td>
+                {{item.quantity}}
+                <a href="{{path('app_cart_add', {id:item.product.id})}}" class="btn btn-sm btn-light">
+                  <i class="fas fa-plus"></i>
+                </a>
+              </td>
               <td>{{item.product.price * item.quantity}}</td>
               <td>
                 <a href="{{path('app_cart_remove', {id:item.product.id})}}" class="btn btn-danger btn-sm">
