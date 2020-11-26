@@ -23,6 +23,7 @@ class PaymentController extends AbstractController
 
     /**
      * @Route("/payment", name="app_payment")
+     * @IsGranted("ROLE_USER")
      */
     public function index()
     {
@@ -53,6 +54,7 @@ class PaymentController extends AbstractController
 
     /**
      *  @Route("/checkout-error", name="app_checkout_error")
+     * @IsGranted("ROLE_USER")
      */
     public function checkoutError(EntityManagerInterface $em, BillRepository $billRepository)
     {
@@ -70,6 +72,7 @@ class PaymentController extends AbstractController
 
     /**
      *  @Route("/create-checkout-session", name="checkout")
+     * @IsGranted("ROLE_USER")
      */
     public function checkout()
     {
