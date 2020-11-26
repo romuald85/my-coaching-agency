@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PaymentController extends AbstractController
@@ -32,9 +33,15 @@ class PaymentController extends AbstractController
 
     /**
      *  @Route("/checkout-success", name="app_checkout_success")
+     * @IsGranted("ROLE_USER")
      */
     public function checkoutSuccess(CommandsController $commandsController)
     {
+        if(!$this->getUser()){
+            $this->addFlash("warning", "Vous n'êtes pas le bon utilisateur");
+            return $this->redirectToRoute('app_pricing');
+        }
+
         $commandsController->prepareCommandAction();// valider la commande préparée de la page panier une fois arrivé sur la page succès après le paiement et vide le panier en bdd
 
         header("Refresh:3;url=/profile");
