@@ -30,11 +30,11 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
-        /*if ($this->getUser()) {
-            $this->addFlash('info', 'Vous êtes déjà connecté!');
+        if ($this->getUser()) {
+            $this->addFlash('info', 'Vous avez déjà un compte!');
 
-             return $this->redirectToRoute('app_article');
-        }*/
+             return $this->redirectToRoute('app_profile');
+        }
         
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -92,14 +92,14 @@ class RegistrationController extends AbstractController
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
         } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $exception->getReason());
+            $this->addFlash('error', $exception->getReason());
 
-            return $this->redirectToRoute('app_register');
+            return $this->redirectToRoute('app_home');
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Votre adresse e-mail a été vérifiée.');
 
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('app_home');
     }
 }
