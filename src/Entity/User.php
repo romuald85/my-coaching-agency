@@ -46,6 +46,12 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Veuillez entrer votre prénom")
      */
@@ -225,6 +231,18 @@ class User implements UserInterface
     public function getfullName(): string
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
     }
 
     public function getPlainPassword(): ?string
