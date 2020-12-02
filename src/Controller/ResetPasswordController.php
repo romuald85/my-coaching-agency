@@ -39,6 +39,12 @@ class ResetPasswordController extends AbstractController
      */
     public function request(Request $request, MailerInterface $mailer): Response
     {
+        if ($this->getUser()) {
+            $this->addFlash('info', 'Vous êtes déjà connecté!');
+
+             return $this->redirectToRoute('app_profile');
+        }
+
         $form = $this->createForm(ResetPasswordRequestFormType::class);
         $form->handleRequest($request);
 
