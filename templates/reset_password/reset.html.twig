@@ -5,11 +5,13 @@
 {% block body %}
     <div class="mt-5 container">
         <div class="row">
-            {{ form_start(resetForm) }}
-                <h1 class="mt-5">Réinitialisez votre mot de passe</h1>
-                {{ form_row(resetForm.plainPassword) }}
-                <button class="btn btn-primary">Réinitialiser le mot de passe</button>
-            {{ form_end(resetForm) }}
+            <div class="col-md-6 mx-auto">
+                {{ form_start(resetForm) }}
+                    <h1 class="mt-5 pb-3 text-center">Réinitialisez votre mot de passe</h1>
+                    {{ form_row(resetForm.plainPassword) }}
+                    <button class="btn btn-primary btn-block">Réinitialiser le mot de passe</button>
+                {{ form_end(resetForm) }}
+            </div>
         </div>
     </div>
 {% endblock %}
