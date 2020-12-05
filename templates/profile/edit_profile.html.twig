@@ -11,8 +11,13 @@
                     {{form_row(form.lastName)}}
                     {{form_row(form.firstName)}}
                     {{form_row(form.email)}}
-                    <input class="btn btn-primary btn-block" type="submit" value="Modifier">
-                {{form_end(form)}}    
+                    <input class="mb-3 btn btn-primary btn-block" type="submit" value="Modifier">
+                {{form_end(form)}}
+                <a class="btn btn-danger btn-block" onclick="event.preventDefault(); confirm('Confirmer la suppression') && document.getElementById('js_profile_delete').submit()" href="#">Supprimer le compte de l'utilisateur</a>
+                <form id="js_profile_delete" action="{{path('app_profile_delete', {id:app.user.id})}}" method="POST" style="display:none;">
+                    <input type="hidden" name="csrf_token" value="{{csrf_token('profile_deletion_' ~ app.user.id)}}">
+                    <input type="hidden" name="_method" value="DELETE">
+                </form>
             </div>
         </div>
     </div>

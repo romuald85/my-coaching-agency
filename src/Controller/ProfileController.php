@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\EditProfileType;
 use App\Form\EditPassWordType;
+use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CommandRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -107,5 +109,20 @@ class ProfileController extends AbstractController
         return $this->render('profile/article_profile.html.twig', [
             'articles' => $articles
         ]);
+    }
+
+    /**
+     * @Route("/profile/delete/{id<[0-9]+>}", name="app_profile_delete", methods={"DELETE"})
+     */
+    public function profileDelete(Request $request, EntityManagerInterface $em, User $user)
+    {
+        if($this->isCsrfTokenValid('profile_deletion_' . $user->getId(), $request->request->get('csrf_token'))){
+            $em->remove($user);
+            $em->flush();
+
+            $this->addFlash('info', 'Profil supprimé');
+        }
+
+        return $this->redirectToRoute('app_home');
     }
 }

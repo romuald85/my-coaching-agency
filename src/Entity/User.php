@@ -84,7 +84,7 @@ class User implements UserInterface
     private $cart;
 
     /**
-     * @ORM\OneToMany(targetEntity=PostLike::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=PostLike::class, mappedBy="user", orphanRemoval=true)
      */
     private $likes;
 
