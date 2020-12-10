@@ -88,14 +88,14 @@
     <hr class="featurette-divider">
     <div class="container-tab">
       {% for product in products %}
-          <div class="container-featurette row featurette">
+          <div class="reveal container-featurette row featurette">
               <div id="product-text" class="col-md-7">
-                <h2 class="featurette-heading"><a class="text-secondary text-decoration-none" href="{{path('app_show_product_to_buy', {id: product.id})}}">{{product.title}}</a></h2>
-                <p class="lead">{{product.description}}</p>
+                <h2 class="reveal-2 featurette-heading"><a class="text-secondary text-decoration-none" href="{{path('app_show_product_to_buy', {id: product.id})}}">{{product.title}}</a></h2>
+                <p class="reveal-3 lead">{{product.description}}</p>
               </div>
               <div id="product-image" class="col-md-5">
                 <a href="{{path('app_show_product_to_buy', {id: product.id})}}">
-                  <img class="card-img-top" src="{{ (product.imageName ? vich_uploader_asset(product) : asset('build/images/empty.jpg'))}}" alt="{{product.title}}">
+                  <img class="reveal-1 card-img-top" src="{{ (product.imageName ? vich_uploader_asset(product) : asset('build/images/empty.jpg'))}}" alt="{{product.title}}">
                 </a>
               </div>
           </div>
