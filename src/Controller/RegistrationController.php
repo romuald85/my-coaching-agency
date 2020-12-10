@@ -102,4 +102,12 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_home');
     }
+
+    /**
+     * @Route("/conditions", name="app_conditions")
+     */
+    public function conditions()
+    {
+        return $this->render('registration/conditions.html.twig');
+    }
 }
