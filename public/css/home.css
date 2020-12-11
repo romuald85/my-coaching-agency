@@ -12,10 +12,7 @@
 
 .carousel-image
 {
-    background: #333;
     height: 100vh;
-    background-repeat: no-repeat;
-    background-size: cover;
     position: relative;
     overflow-x: hidden;
 }
@@ -34,7 +31,7 @@
 {
     position: absolute;
     top: 40%;
-    left: 5%;
+    background-color: rgba(48, 47, 53, .63);
 }
 
 .carousel-title
