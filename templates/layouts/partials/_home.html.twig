@@ -12,34 +12,31 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img class="carousel-image" src="{{asset('images/haltere.jpg')}}" alt="">
+        <img class="carousel-image" src="{{asset('images/haltere.jpg')}}" alt="haltere">
         <div class="container">
-          <div class="carousel-caption text-left">
+          <div class="rounded carousel-caption text-left" style="padding-left: 20px;">
             <div class="carousel-title">
-              <h1>Example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p class="container-btn"><a class="btn-carousel btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+              <h1>La musculation, un sport complémentaire.</h1>
+              <p class="reveal-2">Adepte d'endurance ? Pratiquant régulier de sports de combat ? Les séances de musculation sont le complément idéal à votre entrainement sportif pour l'amélioration des performances dans votre pratique sportive et une meilleure stabilité, découvrez sur ce site quelques articles consacrés à ce sujet</p>
             </div>
           </div>
         </div>
       </div>
       <div class="carousel-item">
-        <img class="carousel-image" src="{{asset('images/workout.jpg')}}" alt="">
+        <img class="carousel-image" src="{{asset('images/workout.jpg')}}" alt="workout">
         <div class="container">
-          <div class="carousel-caption">
-            <h1 class="carousel-title">Another example headline.</h1>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p class="container-btn"><a class="btn-carousel btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+          <div class="rounded carousel-caption">
+            <h1 class="carousel-title">Musclez vous dans la rue avec le Street Workout !</h1>
+            <p>Le street workout est une discipline à part entière, consistant à réaliser des exercices au poids de corps, en milieu urbain. Si vous ne supportez pas d’être enfermé dans une salle de sport pour vous dépenser physiquement, le street workout pourrait vous intéresser…</p>
           </div>
         </div>
       </div>
       <div class="carousel-item">
-        <img class="carousel-image" src="{{asset('images/crossfit.jpg')}}" alt="">
+        <img class="carousel-image" src="{{asset('images/crossfit.jpg')}}" alt="crossfit">
         <div class="container">
-          <div class="carousel-caption text-right">
-            <h1 class="carousel-title">One more for good measure.</h1>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p class="container-btn"><a class="btn-carousel btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+          <div class="rounded carousel-caption text-right" style="padding-right: 20px;">
+            <h1 class="carousel-title">Présentation du CrossFit.</h1>
+            <p>Avez-vous déjà entendu parlé du CrossFit ? Venue des Etats-Unis, cette activité propose un entraînement complet, grâce à mélange d’exercices de fitness, d’haltérophilie, et de cardio. Découvrez cette méthode de remise en forme où le challenge et l’esprit communautaire priment avant tout.</p>
           </div>
         </div>
       </div>
@@ -67,19 +64,19 @@
         <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><circle width="100%" height="100%" fill="#777"/><image xlink:href="{{asset('images/silouhette_muscu.jpg')}}" x="0" y="-15%" height="100%" width="100%"/></svg>
         <h2>Musculation</h2>
         <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">Pour en savoir plus &raquo;</a></p>
+        <p><a class="btn btn-secondary" href="{{path('app_blog')}}" role="button">Pour en savoir plus &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
         <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><circle width="100%" height="100%" fill="#777"/><image xlink:href="{{asset('images/silouhette_street_workout.jpg')}}" x="0" y="0" height="100%" width="100%"/></svg>
         <h2>Street workout</h2>
         <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">Pour en savoir plus &raquo;</a></p>
+        <p><a class="btn btn-secondary" href="{{path('app_blog')}}" role="button">Pour en savoir plus &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
         <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><circle width="100%" height="100%" fill="#777"/><image xlink:href="{{asset('images/silouhette_crossfit.jpg')}}" x="0" y="0" height="100%" width="100%"/></svg>
         <h2>Crossfit</h2>
         <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">Pour en savoir plus &raquo;</a></p>
+        <p><a class="btn btn-secondary" href="{{path('app_blog')}}" role="button">Pour en savoir plus &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 
