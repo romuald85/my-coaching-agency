@@ -107,7 +107,7 @@ class ArticleController extends AbstractController
      */
     public function blog(ArticleRepository $articleRepository): Response
     {
-        $articles = $articleRepository->findBy([], ['createdAt' => 'DESC']);
+        $articles = $articleRepository->findOneBy([], ['createdAt' => 'DESC']);
 
         return $this->render('article/blog.html.twig', compact('articles'));
     }

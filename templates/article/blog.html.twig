@@ -1,39 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title 'Mon blog' %}
-
+{% block title 'Les catégories des articles' %}
 {% block body %}
-    <h1 class="pt-5 pb-5 text-center">La pratique d'un sport avec un coach sportif</h1>
-
     <div class="container">
-        <div class="row">
-            {% for article in articles %}
-            <div class="col-6 col-md-4"></div>
-                <div class="col-6 col-md-4">
-                    <article class="mt-5 mb-5 bg-white rounded shadow">
-                        <a href="{{path('app_blog_article_show', {id:article.id})}}" class="btn btn-light"><h2>{{article.title}}</h2></a>
-                        <a href="{{path('app_blog_article_show', {id:article.id})}}" class="btn btn-light">
-                            <img src="{{ (article.imageName ? vich_uploader_asset(article) : asset('images/empty.jpg'))}}" alt="{{ article.title }}" class="w-100" />                            
-                        </a>
-                        <p class="text-break">{{article.description}}</p>
-                        <a href="{{path('app_blog_like', {id:article.id})}}" class="btn btn-link js-like-link">
-                            {% if app.user and article.isLikeByUser(app.user) %}
-                                <i class="fas fa-thumbs-up"></i>
-                            {% else %}
-                                <i class="far fa-thumbs-up"></i>
-                            {% endif %}
-                            <span class="js-likes">{{article.likes|length}}</span>
-                            <span class="js-label">J'aime</span>
-                        </a>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4">
+        {% if articles|length > 0 %}
+            <h1 class="mt-5 text-center text-muted">Articles par catégorie</h1>
+            {% for row in articles|batch(3) %}
+                <div class="row mb-5">
+                    {% for article in row %}
+                        <div class="col-md-4">
+                            <article class="article bg-white rounded shadow">
+                                <div class="mw-100 overflow-hidden rounded-top">
+                                    <a href="{{path('app_article_show', {id:article.id})}}">
+                                        <img src="{{ (article.imageName ? vich_uploader_asset(article) : asset('build/images/empty.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ article.title }}" class="w-100" />                            
+                                    </a>
+                                </div>
+                                <h2 class="h5 pl-3 pt-3"><a href="{{path('app_article_show', {id:article.id})}}" class="text-secondary text-decoration-none">{{article.title}}</a></h2>
+                                <p class="class-muted pl-3 pb-3">
+                                    <small>Publié par {{article.user.fullName}} </small><br/>
+                                    <small class="text-right">catégorie: {{article.category}}</small>
+                                </p>
+                            </article>
+                        </div>
+                    {% endfor %}
                 </div>
             {% endfor %}
-        </div>
+        {% else %}
+            <p class="mt-5 text-center h3">Il n'y a pas encore d'article <a href="{{path('app_article_create')}}">Soyez le premier</a></p>
+        {% endif %}
     </div>
-{% endblock %}
-
-{% block javascripts %}
-    <script src="{{asset("js/like_blog.js")}}"></script>
 {% endblock %}

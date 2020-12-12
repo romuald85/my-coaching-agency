@@ -13,7 +13,8 @@
                     <div class="p-3">
                         <h1 class="h5 text-secondary">{{article.title}}</h1>
                         <p class="class-muted">
-                            <small>Publié <time datetime="{{article.createdAt|date('d-m-Y H:i:s')}}">{{article.createdAt|ago}}</time> par {{article.user.fullName}}</small>
+                            <small>Publié <time datetime="{{article.createdAt|date('d-m-Y H:i:s')}}">{{article.createdAt|ago}}</time> par {{article.user.fullName}}</small><br/>
+                            <small>catégorie: {{article.category}}</small>
                         </p>
                         <p class="text-break pt-3">
                             {{article.description}}

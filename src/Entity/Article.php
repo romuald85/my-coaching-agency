@@ -74,6 +74,11 @@ class Article
      */
     private $likes;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $category;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -227,5 +232,17 @@ class Article
             }
         }
         return false;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }

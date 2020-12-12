@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ArticleType extends AbstractType
@@ -34,6 +35,14 @@ class ArticleType extends AbstractType
                 'attr' => [
                     'placeholder' => 'description'
                 ]
+            ])
+            ->add('category', ChoiceType::class, [
+                'label' => 'catégorie',
+                'choices' => [
+                    'musculation' => 'musculation',
+                    'street-workout' => 'street-workout',
+                    'crossfit' => 'crossfit'
+                ] 
             ])
         ;
     }
