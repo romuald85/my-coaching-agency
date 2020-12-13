@@ -3,7 +3,7 @@
 {% block title 'Mon blog' %}
 
 {% block body %}
-    <h1 class="pt-5 pb-5 text-center">La pratique d'un sport avec un coach sportif</h1>
+    <h1 class="pt-5 pb-5 text-center">Catégorie musculation</h1>
 
     <div class="container">
         <div class="row">
@@ -15,7 +15,7 @@
                         <a href="{{path('app_blog_article_show', {id:article.id})}}" class="btn btn-light">
                             <img src="{{ (article.imageName ? vich_uploader_asset(article) : asset('images/empty.jpg'))}}" alt="{{ article.title }}" class="w-100" />                            
                         </a>
-                        <p class="text-break">{{article.description}}</p>
+                        <p class="pl-3 stext-break">{{article.description}}</p>
                         <a href="{{path('app_blog_like', {id:article.id})}}" class="btn btn-link js-like-link">
                             {% if app.user and article.isLikeByUser(app.user) %}
                                 <i class="fas fa-thumbs-up"></i>

@@ -3,28 +3,18 @@
 {% block title 'Mon blog' %}
 
 {% block body %}
-    <h1 class="pt-5 pb-5 text-center">La pratique d'un sport avec un coach sportif</h1>
+    <h1 class="pt-5 pb-5 text-center">Les catégories des articles</h1>
 
     <div class="container">
         <div class="row">
-            {#{% for article in articles %}#}
             <div class="col-6 col-md-4"></div>
                 <div class="col-6 col-md-4">
                     <article class="mt-5 mb-5 bg-white rounded shadow">
-                        <a href="{{path('app_blog_article_show', {id:article1.id})}}" class="btn btn-light"><h2>{{article1.title}}</h2></a>
-                        <a href="{{path('app_blog_article_show', {id:article1.id})}}" class="btn btn-light">
+                        <a href="{{path('blog_musculation')}}" class="btn btn-light"><h2>{{article1.category}}</h2></a>
+                        <a href="{{path('blog_musculation')}}" class="btn btn-light">
                             <img src="{{ (article1.imageName ? vich_uploader_asset(article1) : asset('images/empty.jpg'))}}" alt="{{ article1.title }}" class="w-100" />                            
                         </a>
-                        <p class="text-break">{{article1.description}}</p>
-                        <a href="{{path('app_blog_like', {id:article1.id})}}" class="btn btn-link js-like-link">
-                            {% if app.user and article1.isLikeByUser(app.user) %}
-                                <i class="fas fa-thumbs-up"></i>
-                            {% else %}
-                                <i class="far fa-thumbs-up"></i>
-                            {% endif %}
-                            <span class="js-likes">{{article1.likes|length}}</span>
-                            <span class="js-label">J'aime</span>
-                        </a>
+                        <p>La musculation est une activité physique qui peut être réalisée par tous et dans n’importe quel lieu. Les avantages sont bien plus nombreux que les inconvénients à condition de suivre quelques conseils tels que suivre un programme d’entraînement, bien se reposer ou encore ne pas utiliser de produits illicites.</p>
                     </article>
                 </div>
         </div>
@@ -32,20 +22,11 @@
             <div class="col-6 col-md-4"></div>
                 <div class="col-6 col-md-4">
                     <article class="mt-5 mb-5 bg-white rounded shadow">
-                        <a href="{{path('app_blog_article_show', {id:article2.id})}}" class="btn btn-light"><h2>{{article2.title}}</h2></a>
-                        <a href="{{path('app_blog_article_show', {id:article1.id})}}" class="btn btn-light">
+                        <a href="{{path('blog_street_workout')}}" class="btn btn-light"><h2>{{article2.category}}</h2></a>
+                        <a href="{{path('blog_street_workout')}}" class="btn btn-light">
                             <img src="{{ (article2.imageName ? vich_uploader_asset(article2) : asset('images/empty.jpg'))}}" alt="{{ article2.title }}" class="w-100" />                            
                         </a>
-                        <p class="text-break">{{article2.description}}</p>
-                        <a href="{{path('app_blog_like', {id:article2.id})}}" class="btn btn-link js-like-link">
-                            {% if app.user and article2.isLikeByUser(app.user) %}
-                                <i class="fas fa-thumbs-up"></i>
-                            {% else %}
-                                <i class="far fa-thumbs-up"></i>
-                            {% endif %}
-                            <span class="js-likes">{{article2.likes|length}}</span>
-                            <span class="js-label">J'aime</span>
-                        </a>
+                        <p>Le Street Workout est un sport pour tous : hommes et femmes de tous les âges et milieux sociaux, personnes en situation de handicap, certains corps de métiers (gendarmes, pompiers, militaires, sportifs professionnels...), associations et entreprises ....</p>
                     </article>
                 </div>
         </div>
@@ -53,25 +34,15 @@
             <div class="col-6 col-md-4"></div>
                 <div class="col-6 col-md-4">
                     <article class="mt-5 mb-5 bg-white rounded shadow">
-                        <a href="{{path('app_blog_article_show', {id:article3.id})}}" class="btn btn-light"><h2>{{article3.title}}</h2></a>
-                        <a href="{{path('app_blog_article_show', {id:article3.id})}}" class="btn btn-light">
+                        <a href="{{path('blog_crossfit')}}" class="btn btn-light"><h2>{{article3.category}}</h2></a>
+                        <a href="{{path('blog_crossfit')}}" class="btn btn-light">
                             <img src="{{ (article3.imageName ? vich_uploader_asset(article3) : asset('images/empty.jpg'))}}" alt="{{ article3.title }}" class="w-100" />                            
                         </a>
-                        <p class="text-break">{{article3.description}}</p>
-                        <a href="{{path('app_blog_like', {id:article3.id})}}" class="btn btn-link js-like-link">
-                            {% if app.user and article3.isLikeByUser(app.user) %}
-                                <i class="fas fa-thumbs-up"></i>
-                            {% else %}
-                                <i class="far fa-thumbs-up"></i>
-                            {% endif %}
-                            <span class="js-likes">{{article3.likes|length}}</span>
-                            <span class="js-label">J'aime</span>
-                        </a>
+                        <p>Le CrossFit combine principalement la force athlétique, l'haltérophilie, la gymnastique et les sports d'endurance1. Le mot crossfit vient de la contraction de cross fitness (en français, entraînement croisé), appelé ainsi parce qu'il mélange différentes activités physiques et sportives préexistantes.</p>
                     </article>
                 </div>
         </div>
-            <div class="col-6 col-md-4"></div>
-            {#{% endfor %}#}
+        <div class="col-6 col-md-4"></div>
     </div>
 {% endblock %}
 
