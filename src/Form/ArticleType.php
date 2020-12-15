@@ -26,18 +26,22 @@ class ArticleType extends AbstractType
         ])
             ->add('title', TextType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'titre'
                 ]
             ])
             ->add('description', TextareaType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
-                    'placeholder' => 'description'
+                    'placeholder' => 'description',
+                    'id' => 'mytextarea'
                 ]
             ])
             ->add('category', ChoiceType::class, [
                 'label' => 'catégorie',
+                'required' => false,
                 'choices' => [
                     'musculation' => 'musculation',
                     'street-workout' => 'street-workout',

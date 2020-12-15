@@ -44,11 +44,15 @@ class ProductsType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'description'
+                    'placeholder' => 'description',
+                    'id' => 'mytextarea'
                 ]
             ])
             ->add('bigDescription', TextareaType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => [
+                    'id' => 'mytextarea'
+                ]
             ])
         ;
     }

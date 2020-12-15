@@ -22,7 +22,11 @@ class ContactType extends AbstractType
                 'label' => 'Prénom'
                 ])
             ->add('email', EmailType::class)
-            ->add('message', TextareaType::class)
+            ->add('message', TextareaType::class, [
+                'attr' => [
+                    'id' => 'mytextarea'
+                ]
+            ])
         ;
     }
 
