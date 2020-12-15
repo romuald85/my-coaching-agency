@@ -18,7 +18,8 @@ class CommentsType extends AbstractType
                     'placeholder' => 'Écrire un commentaire',
                     'id' => 'mytextarea'
                 ],
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
         ;
     }

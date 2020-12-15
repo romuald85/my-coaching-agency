@@ -15,7 +15,7 @@
                         <a href="{{path('app_blog_article_show', {id:article.id})}}" class="btn btn-light">
                             <img src="{{ (article.imageName ? vich_uploader_asset(article) : asset('images/empty.jpg'))}}" alt="{{ article.title }}" class="w-100" />                            
                         </a>
-                        <p class="pl-3 pr-3 text-break">{{article.description[:250] ~ '...'}}</p>
+                        <p class="pl-3 pr-3 text-break">{{article.description|u.truncate(450, '...')|raw}}</p>
                         <p><a class="ml-3 btn btn-secondary" href="{{path('app_blog_article_show', {id:article.id})}}" role="button">Lire la suite &raquo;</a></p>
                         <a href="{{path('app_blog_like', {id:article.id})}}" class="btn btn-link js-like-link">
                             {% if app.user and article.isLikeByUser(app.user) %}

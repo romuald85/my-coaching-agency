@@ -17,7 +17,7 @@
                             <small>catégorie: {{article.category}}</small>
                         </p>
                         <p class="text-break pt-3">
-                            {{article.description}}
+                            {{article.description|raw}}
                         </p>
                         <div class="pt-3">
                             <a href="{{path('app_article_edit', {id:article.id})}}" class="btn btn-light">Modifier</a>

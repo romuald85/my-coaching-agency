@@ -36,7 +36,7 @@ class ArticleType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'description',
-                    'id' => 'mytextarea'
+                    'id' => 'mytextarea',
                 ]
             ])
             ->add('category', ChoiceType::class, [
