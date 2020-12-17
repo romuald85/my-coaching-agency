@@ -17,7 +17,7 @@
                 </a>
                 <h1 class="card-title pricing-card-title">{{product.price}} €<small class="text-muted">/ mois</small></h1>
                 <h4 class="my-0 font-weight-normal">{{product.subtitle}}</h4>
-                <p>{{product.description}}</p>
+                <p>{{product.description|u.truncate(704, '...')|raw}}</p>
                 <a href="{{path('app_show_product_to_buy', {id:product.id})}}" class="btn btn-lg btn-block btn-primary">En savoir plus</a>
             </div>
             </div>

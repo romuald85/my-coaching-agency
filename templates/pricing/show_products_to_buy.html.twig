@@ -5,7 +5,7 @@
 {% block body %}
     
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h1 class="mt-5 mb-5 display-4">Programme {{product.title}}</h1>
+  <h1 class="mt-5 mb-5 display-4">{{product.title}}</h1>
   <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
 </div>
 
@@ -19,7 +19,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{product.subtitle}}</h5>
-                <p class="card-text">{{product.bigDescription}}</p>
+                <p class="card-text">{{product.description|raw}}</p>
                 <a href="{{path('app_cart_add', {id:product.id})}}" class="btn btn-lg btn-block btn-primary">
                     <i class="fas fa-shopping-cart"></i>
                     Ajouter au panier

@@ -15,7 +15,7 @@
                         <p class="text-break pt-3">
                             {{products.price}}
                         </p>
-                        <p>{{ products.description }}</p>
+                        <p>{{ products.description|raw }}</p>
                         <div class="pt-3">
                             <a href="{{path('app_products_edit', {id:products.id})}}" class="btn btn-light">Modifier</a>
                             <a href="#" onclick="event.preventDefault(); confirm('Confirmer la suppression') && document.getElementById('js_article_products_delete').submit()" class="btn btn-light">Supprimer</a>
