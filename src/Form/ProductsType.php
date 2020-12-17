@@ -25,24 +25,28 @@ class ProductsType extends AbstractType
         ])
             ->add('title', TextType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'titre'
                 ]
             ])
             ->add('subtitle', TextType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'sous-titre'
                 ]
             ])
             ->add('price', TextType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'prix'
                 ]
             ])
             ->add('description', TextareaType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'description',
                     'id' => 'mytextarea'
@@ -50,6 +54,7 @@ class ProductsType extends AbstractType
             ])
             ->add('bigDescription', TextareaType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'id' => 'mytextarea'
                 ]
