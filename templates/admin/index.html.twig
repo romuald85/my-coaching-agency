@@ -3,6 +3,10 @@
 {% block title %}Administration!{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5">Administration</h1>
-    <a href="{{path('app_users')}}">Liste des utilisateurs</a>
+    <h1 class="mt-5 px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">Administration</h1>
+    <div class="container">
+        <a class="mb-5 btn btn-primary" href="{{path('app_users')}}">Liste des utilisateurs</a><br/>
+        <a class="mb-5 btn btn-primary" href="{{path('app_products')}}">Liste des programmes</a><br/>
+        <a class="btn btn-primary" href="{{path('app_create_products')}}">Créer un produit</a>
+    </div>
 {% endblock %}
