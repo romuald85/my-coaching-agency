@@ -24,7 +24,7 @@
                                 <td>{{command.date|date("d/m/Y")}}</td>
                                 <td>
                                     {% for item in command.command %}
-                                        <li>{{item.product}}</li>
+                                        <a href="{{path('product_payed')}}"><li>{{item.product}}</li></a>
                                     {% endfor %}
                                 </td>
                                 <td>

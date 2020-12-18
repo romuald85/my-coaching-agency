@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Programmes achetés{% endblock %}
+
+{% block body %}
+    <h1 class="mt-5 px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">Programmes achetés</h1>
+
+    <div class="container">
+        {% if app.user.commands|length > 0 %}
+            {% for command in app.user.commands %}
+                {% for item in command.command %}
+                    {% if item.product == 'Programme musculation' %}
+                        {% for program in program1 %}
+                            <div class="card" style="width: 50rem;">
+                                <img class="card-img-top" src="{{ (program.imageName ? vich_uploader_asset(program) : asset('build/images/empty.jpg'))}}" alt="{{program.title}}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{program.title}}</h5>
+                                    <h3 class="card-title">{{program.subtitle}}</h3>
+                                    <p class="card-text">{{program.description|raw}}</p>
+                                    <p class="card-text">{{program.bigDescription|raw}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% if item.product == 'Programme Street-Workout' %}
+                        {% for program in program2 %}
+                            <div class="card" style="width: 50rem;">
+                                <img class="card-img-top" src="{{ (program.imageName ? vich_uploader_asset(program) : asset('build/images/empty.jpg'))}}" alt="{{program.title}}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{program.title}}</h5>
+                                    <h3 class="card-title">{{program.subtitle}}</h3>
+                                    <p class="card-text">{{program.description|raw}}</p>
+                                    <p class="card-text">{{program.bigDescription|raw}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% if item.product == 'Programme Crossfit' %}
+                        {% for program in program3 %}
+                            <div class="card" style="width: 50rem;">
+                                <img class="card-img-top" src="{{ (program.imageName ? vich_uploader_asset(program) : asset('build/images/empty.jpg'))}}" alt="{{program.title}}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{program.title}}</h5>
+                                    <h3 class="card-title">{{program.subtitle}}</h3>
+                                    <p class="card-text">{{program.description|raw}}</p>
+                                    <p class="card-text">{{program.bigDescription|raw}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    </div>
+    
+{% endblock %}

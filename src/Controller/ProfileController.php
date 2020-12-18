@@ -8,6 +8,7 @@ use App\Form\EditPassWordType;
 use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CommandRepository;
+use App\Repository\ProductsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -124,5 +125,24 @@ class ProfileController extends AbstractController
         }
 
         return $this->redirectToRoute('app_home');
+    }
+
+    /** 
+     * @Route("/profile/command/program", name="product_payed")
+    */
+    public function showProductPayed(CommandRepository $commandRepository, ProductsRepository $productsRepo)
+    {
+        $commands = $commandRepository->findAll();
+
+        $program1 = $productsRepo->findBy(['title' => 'Programme musculation']);
+        $program2 = $productsRepo->findBy(['title' => 'Programme Street-Workout']);
+        $program3 = $productsRepo->findBy(['title' => 'Programme CrossFit']);
+
+        return $this->render('profile/product_payed.html.twig', [
+            'commands' => $commands,
+            'program1' => $program1,
+            'program2' => $program2,
+            'program3' => $program3
+        ]);
     }
 }
