@@ -4,7 +4,7 @@
 {% block body %}
     <div class="container">
         {% if articles|length > 0 %}
-            <h1 class="mt-5 text-center text-muted">{{ pluralize(articles|length, 'Article', 'Articles')}}</h1>
+            <h1 class="mt-5 px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-muted">{{ pluralize(articles|length, 'Article', 'Articles')}}</h1>
             {% for row in articles|batch(3) %}
                 <div class="row mb-5">
                     {% for article in row %}
