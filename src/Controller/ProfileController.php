@@ -12,8 +12,10 @@ use App\Repository\ProductsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProfileController extends AbstractController
 {
@@ -115,9 +117,11 @@ class ProfileController extends AbstractController
     /**
      * @Route("/profile/delete/{id<[0-9]+>}", name="app_profile_delete", methods={"DELETE"})
      */
-    public function profileDelete(Request $request, EntityManagerInterface $em, User $user)
+    public function profileDelete(Request $request, EntityManagerInterface $em, User $user, TokenStorageInterface $tokenStorage, SessionInterface $session)
     {
         if($this->isCsrfTokenValid('profile_deletion_' . $user->getId(), $request->request->get('csrf_token'))){
+            $tokenStorage->setToken(null);
+            $session->invalidate();
             $em->remove($user);
             $em->flush();
 

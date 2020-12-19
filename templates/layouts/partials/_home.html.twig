@@ -88,7 +88,7 @@
           <div class="reveal container-featurette row featurette">
               <div id="product-text" class="col-md-7">
                 <h2 class="reveal-2 featurette-heading"><a class="text-secondary text-decoration-none" href="{{path('app_show_product_to_buy', {id: product.id})}}">{{product.title}}</a></h2>
-                <p class="reveal-3 lead">{{product.description}}</p>
+                <p class="reveal-3 lead">{{product.description|u.truncate(0)|raw}}</p>
               </div>
               <div id="product-image" class="col-md-5">
                 <a href="{{path('app_show_product_to_buy', {id: product.id})}}">
