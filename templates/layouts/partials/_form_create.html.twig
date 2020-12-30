@@ -1,6 +1,9 @@
 {{form_start(form)}}
 
-    {{form_widget(form)}}
+{{form_row(form.imageFile)}}
+{{form_row(form.title|raw)}}
+{{form_row(form.description|raw)}}
+{{form_row(form.category)}}
 
-    <input type="submit" class="btn btn-primary btn-block" value="{{submitButtonText|default('Créer article')}}">
-    {{form_end(form)}}
+<input type="submit" class="btn btn-primary btn-block" value="{{submitButtonText|default('Créer article')}}">
+{{form_end(form)}}
