@@ -26,7 +26,7 @@ class Comments
      * @ORM\Column(type="string", length=255)
      * @Assert\Regex(
      *     pattern     = "/^[a-z]+$/i",
-     *     htmlPattern = "^[a-zA-Z]+$"
+     *     htmlPattern = "^[a-zA-Z]+$")
      */
     private $author;
 
@@ -34,7 +34,7 @@ class Comments
      * @ORM\Column(type="text")
      * @Assert\Regex(
      *     pattern     = "/^[a-z]+$/i",
-     *     htmlPattern = "^[a-zA-Z]+$"
+     *     htmlPattern = "^[a-zA-Z]+$")
      */
     private $comment;
 
