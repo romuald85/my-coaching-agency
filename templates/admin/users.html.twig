@@ -1,50 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des utilisateurs{% endblock %}
+{% block title %}Liste des utilisateurs
+{% endblock %}
 
 {% block body %}
-    <div class="my-5 container">
-        <div class="row">
-            <h1 class="mt-5 px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">Liste des utilisateurs</h1>
-            <table class="table table-striped">
-                <thead>
-                    <th scope="col">Id</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Rôle</th>
-                    <th scope="col">Programmes</th>
-                    <th scope="col">Articles</th>
-                    <th scope="col">Modifier</th>
-                </thead>
-                <tbody>
-                    {% if users|length > 0 %}
-                        {% for user in users %}
-                            <tr>
-                                <td>{{user.id}}</td>
-                                <td>{{user.email}}</td>
-                                <td>
-                                    {% for role in user.roles %}
-                                        {% if role == 'ROLE_ADMIN' %}
-                                            Administrateur
-                                        {% elseif role == 'ROLE_EDITOR' %}
-                                            Éditeur
-                                        {% elseif role == 'ROLE_USER' %}
-                                            Utilisateur
-                                        {% endif %}
-                                    {% endfor %}
-                                </td>
-                                <td><a href="{{path('app_admin_command', {id: user.id})}}" class="btn btn-light">Voir</a></td>
-                                <td><a href="{{path('app_admin_article', {id: user.id})}}" class="btn btn-light">Voir </a></td>
-                                <td><a href="{{path('app_users_edit', {id: user.id})}}" class="btn btn-warning">Modifier</a></td>
-                        {% endfor %}
-                        </tr>
-                    {% else %}
-                        <tr class="mt-5">
-                            <td colspan=5>Il n'y a pas d'utilisateurs inscrit</td>                
-                        </tr>
-                    {% endif %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+	<div class="my-5 container">
+		<div class="row">
+			<h1 class="mt-5 px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">Liste des utilisateurs</h1>
+			<table class="table table-striped">
+				<thead>
+					<th scope="col">Id</th>
+					<th scope="col">Email</th>
+					<th scope="col">Rôle</th>
+					<th scope="col">Programmes</th>
+					<th scope="col">Articles</th>
+					<th scope="col">Modifier</th>
+				</thead>
+				<tbody>
+					{% if users|length > 0 %}
+						{% for user in users %}
+							<tr>
+								<td>{{user.id}}</td>
+								<td>{{user.email}}</td>
+								<td>
+									{% for role in user.roles %}
+										{% if role == 'ROLE_ADMIN' %}
+											Administrateur
+										{% elseif role == 'ROLE_EDITOR' %}
+											Éditeur
+										{% elseif role == 'ROLE_USER' %}
+											Utilisateur
+										{% endif %}
+									{% endfor %}
+								</td>
+								<td>
+									<a href="{{path('app_admin_command', {id: user.id})}}" class="btn btn-light">Voir</a>
+								</td>
+								<td>
+									<a href="{{path('app_admin_article', {id: user.id})}}" class="btn btn-light">Voir
+									</a>
+								</td>
+								<td>
+									<a href="{{path('app_users_edit', {id: user.id})}}" class="btn btn-warning">Modifier</a>
+								</td>
+							{% endfor %}
+						</tr>
+					{% else %}
+						<tr class="mt-5">
+							<td colspan="5">Il n'y a pas d'utilisateurs inscrit</td>
+						</tr>
+					{% endif %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 
 {% endblock %}

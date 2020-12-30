@@ -1,47 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    <div class="mt-5 container">
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <h1 class="mt-5 px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">S'enregistrer</h1>
+	<div class="mt-5 container">
+		<div class="row">
+			<div class="col-md-6 mx-auto">
+				<h1 class="mt-5 px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">S'enregistrer</h1>
 
-                {{ form_start(registrationForm) }}
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{ form_row(registrationForm.lastName) }}
-                        </div>
-                        <div class="col-md-6">
-                            {{ form_row(registrationForm.firstName) }}
-                        </div>
-                    </div>
-                    {{ form_row(registrationForm.email) }}
-                    {{ form_row(registrationForm.plainPassword, {
+				{{ form_start(registrationForm) }}
+				<div class="row">
+					<div class="col-md-6">
+						{{ form_row(registrationForm.lastName) }}
+					</div>
+					<div class="col-md-6">
+						{{ form_row(registrationForm.firstName) }}
+					</div>
+				</div>
+				{{ form_row(registrationForm.email) }}
+				{{ form_row(registrationForm.plainPassword, {
                         label: 'Mot de passe'
                     }) }}
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{ form_row(registrationForm.agreeTerms) }}
-                        </div>
-                        <div class="text-right col-md-6">
-                            <a href="{{path('app_conditions')}}" target="_blank">Mentions légales</a>
-                        </div>
-                    </div>
-                    
-                    {#<div>
-                        <input type="checkbox" name"conditions">
-                        <label for="conditions">Conditions à <a href="{{path('app_conditions')}}" target="_blank">accepter</a></label>
-                    </div>#}
+				<div class="row">
+					<div class="col-md-6">
+						{{ form_row(registrationForm.agreeTerms) }}
+					</div>
+					<div class="text-right col-md-6">
+						<a href="{{path('app_conditions')}}" target="_blank">Mentions légales</a>
+					</div>
+				</div>
 
-                    <button type="submit" class="btn btn-primary btn-block">S'enregistrer</button>
-                    <p class="mt-5 mb-3 text-center text-muted">
-                        Vous avez déjà un compte? <a href="{{path('app_login')}}">Se connecter</a>
-                    </p>
-                {{ form_end(registrationForm) }}
+				<button type="submit" class="btn btn-primary btn-block">S'enregistrer</button>
+				<p class="mt-5 mb-3 text-center text-muted">
+					Vous avez déjà un compte?
+					<a href="{{path('app_login')}}">Se connecter</a>
+				</p>
+				{{ form_end(registrationForm) }}
 
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
