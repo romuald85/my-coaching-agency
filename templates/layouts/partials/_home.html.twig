@@ -106,7 +106,7 @@
 				</div>
 				<div id="product-image" class="col-md-5">
 					<a href="{{path('app_show_product_to_buy', {id: product.id})}}">
-						<img class="reveal-1 card-img-top" src="{{ (product.imageName ? asset(product.imageName) : asset('build/images/empty.jpg'))}}" alt="{{product.title}}">
+						<img class="reveal-1 card-img-top" src="{{ (product.imageName ? vich_uploader_asset(product) : asset('build/images/empty.jpg'))}}" alt="{{product.title}}">
 					</a>
 				</div>
 			</div>
