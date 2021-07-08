@@ -224,11 +224,11 @@ class Article
      *
      * @return boolean
      */
-    function isLikeByUser(User $user) : bool 
+    function isLikeByUser(User $user): bool
     {
         foreach ($this->likes as $like) {
-            if($like->getUser() === $user){
-                return true;   
+            if ($like->getUser() === $user) {
+                return true;
             }
         }
         return false;
